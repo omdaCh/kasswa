@@ -1,0 +1,181 @@
+<div #mainContainer class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-overflow-x-auto tw-h-full">
+    @if(item){
+    <div class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-4">
+        <div id="item-photo"
+            class="tw-flex tw-flex-row tw-flex-1 tw-max-h-[400px] sm:tw-max-w-[400px] tw-gap-1 tw-bg-blue-100 tw-aspect-square tw-rounded-lg">
+            <div class="tw-grow" (touchstart)="posIni = $event.changedTouches[0].pageX"
+                (touchend)="move($event.changedTouches[0].pageX)">
+                <ngb-carousel #carousel class="ttw-grow tw-bg-gray-100 tw-max-h-[400px] tw-rounded-lg">
+                    @for(sidePhoto of colorSelected?.photos; track sidePhoto){
+                    <ng-template ngbSlide>
+                        <div class="tw-flex tw-min-h-[400px] tw-max-h-[400px] tw-items-center tw-justify-center">
+                            <img [src]="sidePhoto" class="tw-max-h-[400px] tw-mix-blend-multiply tw-object-contain" />
+                        </div>
+                    </ng-template>
+                    }
+                </ngb-carousel>
+            </div>
+
+        </div>
+        <div id="item-information" class="tw-flex tw-flex-col tw-flex-1 tw-gap-4">
+            @if(item.brand){
+            <div id="item-brand" class="tw-flex tw-flew-row tw-gap-2 tw-items-center ">
+                @if(item.brand.photoUrl){
+                <div class=" tw-p-1 tw-bg-gray-100 tw-rounded-lg">
+                    <img [src]="item.brand.photoUrl" class="tw-w-[30px] tw-mix-blend-multiply">
+                </div>
+                }
+                <span class="tw-text-xs">{{item.brand.name}}</span>
+            </div>
+            }
+            <div class="tw-flex tw-flex-col">
+                <span class="tw-font-bold tw-text-xl text-worn">{{item.name}}</span>
+                <div class="tw-flex tw-flex-row tw-items-center tw-gap-3">
+                    <ngb-rating [rate]="item.rating || 0" [max]="5" [readonly]="true" />
+                    <span class="tw-text-xs">{{item.numberOfReviews}} reviews</span>
+                </div>
+                <div id="item-price" class="tw-flex tw-flex-row tw-gap-2 tw-items-center">
+                    @if(item && item.discountedPrice){
+                    <span class="tw-text-2xl tw-font-bold tw-mt-2 tw-mb-2 text-danger">${{item.discountedPrice}}</span>
+                    <span class="tw-line-through tw-font-bold tw-text-lg">${{item.price}}</span>
+                    <span
+                        class="text-danger tw-font-bold tw-text-lg">-%{{getDiscountPercentage(item.price,item.discountedPrice)}}</span>
+                    }
+                    @else {
+                    <span class="tw-text-2xl tw-font-bold tw-mt-2 tw-mb-2">${{item.price}}</span>
+                    }
+                </div>
+                <div id="item-shipping-coast" class="tw-mt-[-10px]">
+                    <small>Shipping:</small>
+                    <span class="tw-font-bold">
+                        @if(item.shippingCoast !== null && item.shippingCoast!=0){
+                        ${{item.shippingCoast}}
+                        }
+                        @else{
+                        free
+                        }
+                    </span>
+                </div>
+            </div>
+            @if(item.colors){
+            <div id="color" class="tw-flex tw-flex-col tw-gap-1">
+                <small>Color: <span class="tw-font-bold">{{colorSelected?.colorName}}</span></small>
+                <div class="tw-flex tw-flex-row tw-gap-2">
+                    @for(colorPhotos of item.colors; track colorPhotos){
+                    <div id="colorPhoto"
+                        class="tw-bg-gray-100 tw-rounded-lg tw-w-[64px] tw-h-[64px] hover:tw-border-2 tw-border-gray-600"
+                        (click)="selectedColor(colorPhotos)">
+                        <img [src]="colorPhotos.photos[0]"
+                            class="tw-w-[60px] tw-h-[60px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+
+            @if(colorSelected?.sizes){
+            <div id="size" class="tw-flex tw-flex-col tw-gap-1 ">
+                <small>Size: <span class="tw-font-bold">{{sizeSelected?.name}}</span></small>
+                <div class="tw-flex tw-flex-wrap tw-gap-2 tw-overflow-auto">
+                    @for(size of colorSelected?.sizes; track size){
+                    <div class="tw-flex tw-rounded-xl tw-w-[70px] tw-min-w-[70px] tw-h-[30px] tw-justify-center tw-cursor-pointer"
+                        [ngClass]="[sizeSelected === size ? 'tw-border-2 tw-border-gray-500' : 'tw-border-[1px] tw-border-gray-300 hover:tw-border-gray-500',
+                                     size.available.toString()==='true' ? 'tw-opacity-100' : 'tw-pointer-events-none tw-opacity-50']"
+                        (click)="sizeSelected=size">
+                        <span>{{size.name}}</span>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+
+            <div class="tw-flex tw-flex-row tw-w-full tw-gap-3 tw-mt-auto" id="actions">
+                <button class="btn btn-dark tw-w-full" (click)="addToCart()"
+                    [disabled]="!(colorSelected&&sizeSelected)">ADD TO CART</button>
+                <button class="btn btn-outline-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-heart" viewBox="0 0 16 16">
+                        <path
+                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="tw-full tw-opacity-50">
+        <hr class="hr tw-w-full hr-blurry" />
+    </div>
+
+    <div class="tw-flex tw-flex-col  tw-gap-3">
+        <div class="tw-flex tw-flex-col">
+            <span class="tw-font-bold tw-text-lg">Description</span>
+            <span>{{item.description}}</span>
+        </div>
+
+        <div class="tw-flex tw-flex-col">
+            <span class="tw-font-bold tw-text-lg">Detail</span>
+            <ol>
+                <li><span class="tw-font-bold">Age : </span>
+                    <span>{{item.age}}</span>
+                </li>
+                <li>
+                    <span class="tw-font-bold">Gender : </span>
+                    <span>{{item.gender}}</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="tw-full tw-opacity-50">
+        <hr class="hr tw-w-full hr-blurry" />
+    </div>
+    
+    @if(similairItems.length!=0){
+    <div class="tw-flex tw-flex-col">
+        <span>Similar items</span>
+        <div class="tw-flex tw-flex-row tw-gap-4 tw-overflow-y-auto"
+            id="similarItems">
+            @for(similarItem of similairItems; track similarItem.id){
+            <div id="item" class="tw-flex tw-flex-col tw-cursor-pointer tw-max-w-[150px] tw-w-[150px] "
+                [routerLink]="['/item/item-detail']" [queryParams]="{id:similarItem.id}" >
+                <div
+                    class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative tw-min-w-[150px]">
+                    @if(similarItem.colors[0].photos[0]){
+                    <img [src]="similarItem.colors[0].photos[0]" class="s-image">
+                    }
+                </div>
+                <span class="tw-whitespace-nowrap tw-text-ellipsis tw-overflow-hidden">{{similarItem.name}}</span>
+                <div class="tw-flex tw-flex-row  tw-items-center tw-gap-3">
+                    <ngb-rating [rate]="similarItem?.rating || 0" [max]="5" [readonly]="true" />
+                    <span class="tw-text-xs">{{similarItem?.nbrSold}} Sold</span>
+                </div>
+                <div class="tw-flex tw-flex-row tw-w-full ">
+                    <div class="tw-flex tw-flex-row tw-gap-2 tw-items-center">
+                        @if(similarItem && similarItem.discountedPrice){
+                        <span class=" tw-font-bold tw-mt-2 tw-mb-2 text-danger">${{similarItem.discountedPrice}}</span>
+                        <span class="tw-line-through tw-text-sm">${{similarItem.price}}</span>
+                        }
+                        @else {
+                        <span class="tw-font-bold tw-mt-2 tw-mb-2">${{similarItem?.price}}</span>
+                        }
+                    </div>
+                    <button class="btn btn-rounded tw-ms-auto" (click)="onSimilarItemAddToCartClick($event,similarItem)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-cart-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+                            <path
+                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+
+
+    }
+</div>

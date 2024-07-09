@@ -1,0 +1,89 @@
+<div class="tw-flex tw-flex-col tw-w-full tw-h-full tw-p-4 tw-gap-5">
+    <form name="paymentInfoForm" role="form" [formGroup]="paymentInfoForm" class="tw-flex tw-flex-col tw-gap-3">
+        <span class="tw-text-lg tw-font-bold ">Card information</span>
+        <div class="tw-flex tw-flex-col tw-gap-4">
+            <div class="tw-flex tw-flex-col">
+                <div class="form-floating">
+                    <input id="cardHolderName" formControlName="cardHolderName" class="form-control"
+                        [class.is-invalid]="paymentInfoForm.get('cardHolderName')?.invalid && (paymentInfoForm.get('cardHolderName')?.dirty || paymentInfoForm.get('cardHolderName')?.touched) "
+                        placeholder="Ex: Jak Robert">
+                    <label for="cardHolderName">Card holder name<small> *</small></label>
+                </div>
+                @if(paymentInfoForm.get('cardHolderName')?.invalid && (paymentInfoForm.get('cardHolderName')?.dirty ||
+                paymentInfoForm.get('cardHolderName')?.touched)){
+                <div>
+                    @if(paymentInfoForm.get('cardHolderName')){
+                    <span class="form-text text-danger">This field is required</span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="tw-flex tw-flex-col">
+                <div class="form-floating">
+                    <input id="cardNumber" formControlName="cardNumber" class="form-control"
+                        [class.is-invalid]="paymentInfoForm.get('cardNumber')?.invalid && (paymentInfoForm.get('cardNumber')?.dirty || paymentInfoForm.get('cardNumber')?.touched)"
+                        placeholder="Ex: 4562 3789 9034 5634">
+                    <label for="cardNumber">Card number<small> *</small></label>
+                </div>
+                @if(paymentInfoForm.get('cardNumber')?.invalid && (paymentInfoForm.get('cardNumber')?.dirty ||
+                paymentInfoForm.get('cardNumber')?.touched)){
+                <div>
+                    @if(paymentInfoForm.get('cardNumber')?.errors?.['required']){
+                    <span class="form-text text-danger">This field is required</span>
+                    }
+                    @if(paymentInfoForm.get('cardNumber')?.errors?.['pattern']){
+                    <span class="form-text text-danger">Card number not valid</span>
+                    }
+                </div>
+
+                }
+            </div>
+            <div class="tw-flex tw-flex-row tw-gap-2">
+                <div class="tw-flex tw-flex-col tw-w-[80%]">
+                    <div class="form-floating">
+                        <input id="expairyDate" formControlName="expairyDate" class="form-control"
+                            [class.is-invalid]="paymentInfoForm.get('expairyDate')?.invalid && (paymentInfoForm.get('expairyDate')?.dirty || paymentInfoForm.get('expairyDate')?.touched)"
+                            placeholder="mm/yy">
+                        <label for="expairyDate">Expairy date<small> *</small></label>
+                    </div>
+                    @if(paymentInfoForm.get('expairyDate')?.invalid && (paymentInfoForm.get('expairyDate')?.dirty ||
+                    paymentInfoForm.get('expairyDate')?.touched)){
+                    <div>
+                        @if(paymentInfoForm.get('expairyDate')?.errors?.['required']){
+                        <span class="form-text text-danger">This filed is required</span>
+                        }
+                        @if(paymentInfoForm.get('expairyDate')?.errors?.['pattern']){
+                        <span class="form-text text-danger">Invalid date</span>
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="tw-flex tw-flex-col tw-w-[20%]">
+                    <div class="form-floating">
+                        <input id="cvv" formControlName="cvv" class="form-control"
+                            [class.is-invalid]="paymentInfoForm.get('cvv')?.invalid && (paymentInfoForm.get('cvv')?.dirty || paymentInfoForm.get('cvv')?.touched)"
+                            placeholder="Ex: 523">
+                        <label for="cvv">CVV<small> *</small></label>
+                    </div>
+                    @if(paymentInfoForm.get('cvv')?.invalid && (paymentInfoForm.get('cvv')?.dirty ||
+                    paymentInfoForm.get('cvv')?.touched)){
+                    <div>
+                        @if(paymentInfoForm.get('cvv')?.hasError('required')){
+                        <span class="form-text text-danger">This field is required</span>
+                        }
+                        @if(paymentInfoForm.get('cvv')?.hasError('pattern')){
+                        <span class="form-text text-danger">Invalid cvv</span>
+                        }
+                    </div>
+
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+    <button class="btn btn-primary sm:tw-w-[200px] tw-w-full tw-self-end tw-mt-auto"
+        (click)="onNextClick()">Next</button>
+
+</div>

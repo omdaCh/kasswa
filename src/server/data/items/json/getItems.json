@@ -1,0 +1,146 @@
+{
+    "data": {
+        "items": [
+            {
+                "id": 1,
+                "name": "Cotton T-shirt",
+                "description": "A comfortable cotton T-shirt for everyday wear.",
+                "photoUrl": "./assets/clothes/Cotton T-shirt.png",
+                "price": "$19.99"
+            },
+            { 
+                "id": 2,
+                "name": "Denim Jeans",
+                "description": "Classic denim jeans with a modern fit.",
+                "photoUrl": "./assets/clothes/Denim Jeans.webp",
+                "price": "$39.99"
+            },
+            {
+                "id": 3,
+                "name": "Sneakers",
+                "description": "Stylish sneakers for casual outings.",
+                "photoUrl": "./assets/clothes/Sneakers.jpg",
+                "price": "$29.99"
+            },
+            {
+                "id": 4,
+                "name": "Summer Dress",
+                "description": "Lightweight dress perfect for summer days.",
+                "photoUrl": "./assets/clothes/Summer Dress.webp",
+                "price": "$49.99"
+            },
+            {
+                "id": 5,
+                "name": "Leather Jacket",
+                "description": "Classic leather jacket for a stylish look.",
+                "photoUrl": "./assets/clothes/Leather Jacket.jpg",
+                "price": "$99.99"
+            },
+            {
+                "id": 6,
+                "name": "Hoodie",
+                "description": "Cozy hoodie for chilly evenings.",
+                "photoUrl": "./assets/clothes/Hoodie.jpg",
+                "price": "$34.99"
+            },
+            {
+                "id": 7,
+                "name": "Formal Shirt",
+                "description": "Crisp formal shirt for business meetings.",
+                "photoUrl": "./assets/clothes/Formal Shirt.webp",
+                "price": "$59.99"
+            },
+            {
+                "id": 8,
+                "name": "Track Pants",
+                "description": "Comfortable track pants for workouts.",
+                "photoUrl": "./assets/clothes/Track Pants.webp",
+                "price": "$24.99"
+            },
+            {
+                "id": 9,
+                "name": "Winter Coat",
+                "description": "Warm winter coat to brave the cold.",
+                "photoUrl": "",
+                "price": "$129.99"
+            },
+            {
+                "id": 10,
+                "name": "Casual Shorts",
+                "description": "Relaxed-fit shorts for summer adventures.",
+                "photoUrl": "",
+                "price": "$19.99"
+            },
+            {
+                "id": 11,
+                "name": "Blazer",
+                "description": "Sharp blazer for formal occasions.",
+                "photoUrl": "",
+                "price": "$79.99"
+            },
+            {
+                "id": 12,
+                "name": "Polo Shirt",
+                "description": "Classic polo shirt for a casual look.",
+                "photoUrl": "",
+                "price": "$29.99"
+            },
+            {
+                "id": 13,
+                "name": "Skirt",
+                "description": "Versatile skirt for various occasions.",
+                "photoUrl": "",
+                "price": "$39.99"
+            },
+            {
+                "id": 14,
+                "name": "Cardigan",
+                "description": "Lightweight cardigan for layering.",
+                "photoUrl": "",
+                "price": "$44.99"
+            },
+            {
+                "id": 15,
+                "name": "Sweatpants",
+                "description": "Cozy sweatpants for lounging.",
+                "photoUrl": "",
+                "price": "$29.99"
+            },
+            {
+                "id": 16,
+                "name": "Maxi Dress",
+                "description": "Elegant maxi dress for special occasions.",
+                "photoUrl": "",
+                "price": "$69.99"
+            },
+            {
+                "id": 17,
+                "name": "Tank Top",
+                "description": "Sleeveless tank top for hot days.",
+                "photoUrl": "",
+                "price": "$14.99"
+            },
+            {
+                "id": 18,
+                "name": "Cargo Pants",
+                "description": "Functional cargo pants with multiple pockets.",
+                "photoUrl": "",
+                "price": "$49.99"
+            },
+            {
+                "id": 19,
+                "name": "Sports Bra",
+                "description": "Supportive sports bra for workouts.",
+                "photoUrl": "",
+                "price": "$24.99"
+            },
+            {
+                "id": 20,
+                "name": "Rain Jacket",
+                "description": "Waterproof rain jacket for rainy days.",
+                "photoUrl": "",
+                "price": "$79.99"
+            }
+        ]
+    }
+}

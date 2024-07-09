@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+$form-floating-height: add(1.5rem, $input-height-border);
+
+.btn.btn-rounded {
+  border-radius: 50px;
+}
+
+
+.form-floating>.form-control::placeholder {
+  color: revert;
+}
+
+.form-floating>.form-control:not(:focus)::placeholder {
+  color: transparent;
+}
+
+.detail-image {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  mix-blend-mode: multiply;
+}
+
+
+
+.btn-circle {
+  width: 23px;
+  height: 23px;
+  text-align: center;
+  padding: 4px 3px;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+.s-image {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  mix-blend-mode: multiply;
+}
+
+.full-width-modal .modal-dialog {
+  max-width: 100%;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  overflow-y: scroll;
+  background-color: rgb(239, 239, 239);
+}
+
+.thin-scrollbar ::-webkit-scrollbar {
+  width: 2px;
+  /* Adjust width */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(213, 213, 213);
+  border-radius: 10px;
+}

@@ -1,0 +1,173 @@
+<div  class="tw-flex tw-flex-col tw-w-full tw-h-full tw-p-4 tw-gap-5 tw-overflow-auto">
+    <form name="adressForm" role="form" [formGroup]="shippementInfoForm" class="tw-overflow-auto">
+        <div id="contactInfo" class="tw-flex tw-flex-col tw-gap-2">   
+            <span class="tw-font-bold tw-text-lg">Contact info</span>
+            <div class="tw-flex md:tw-flex-row tw-flex-col tw-w-full tw-gap-3 tw-p-2">
+                <div class="tw-w-full">
+                    <div class="form-floating tw-w-full">
+                        <input formControlName="contactName" class="form-control" id="floatingInput"
+                            [class.is-invalid]="shippementInfoForm.get('contactName')!.invalid && (shippementInfoForm.get('contactName')!.dirty || shippementInfoForm.get('contactName')!.touched)"
+                            placeholder="Ex: Jak Robert" required>
+                        <label for="floatingInput">Contact name<small> *</small></label>
+                    </div>
+                    @if (shippementInfoForm.get('contactName')!.invalid && (shippementInfoForm.get('contactName')!.dirty ||
+                    shippementInfoForm.get('contactName')!.touched)) {
+                    <div>
+                        @if (shippementInfoForm.get('contactName')?.errors?.['required']) {
+                        <small class="form-text text-danger">This field is required</small>
+                        }
+                        @if (shippementInfoForm.get('contactName')?.errors?.['maxlength']) {
+                        <small class="form-text text-danger">Ce champ doit faire moins de 50 caractères.</small>
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="tw-w-full">
+                    <div class="form-floating tw-w-full">
+                        <input id="contactEmail" type="email" formControlName="contactEmail" class="form-control"
+                            [class.is-invalid]="(shippementInfoForm.get('contactEmail')?.invalid && (shippementInfoForm.get('contactEmail')?.dirty || shippementInfoForm.get('contactEmail')?.touched))"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Email<small> *</small></label>
+                    </div>
+                    @if(shippementInfoForm.get('contactEmail')?.invalid && (shippementInfoForm.get('contactEmail')?.dirty ||
+                    shippementInfoForm.get('contactEmail')?.touched)){
+                    <div>
+                        @if(shippementInfoForm.get('contactEmail')?.errors?.['required']){
+                        <small class="from-text text-danger">This filed is required</small>
+                        }
+                        @if(shippementInfoForm.get('contactEmail')?.errors?.['email']){
+                        <small class="form-text text-danger">Invalid email</small>
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="tw-w-full">
+                    <div class="form-floating tw-w-full">
+                        <input id="contactPhoneNumber" class="form-control" formControlName="contactPhoneNumber"
+                            [class.is-invalid]="shippementInfoForm.get('contactPhoneNumber')?.invalid && (shippementInfoForm.get('contactPhoneNumber')?.dirty || shippementInfoForm.get('contactPhoneNumber')?.touched)"
+                            placeholder="+213066097724">
+                        <label for="floatingcontactPhoneNumber">Phone number<small> *</small></label>
+                    </div>
+                    @if(shippementInfoForm.get('contactPhoneNumber')?.invalid && (shippementInfoForm.get('contactPhoneNumber')?.dirty ||
+                    shippementInfoForm.get('contactPhoneNumber')?.touched)){
+                    <div>
+                        @if(shippementInfoForm.get('contactPhoneNumber')?.errors?.['required']){
+                        <small class="form-text text-danger">This field is required</small>
+                        }
+                    </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+        <div id="address" class="tw-flex tw-flex-col tw-gap-2">
+            <span class="tw-font-bold tw-text-lg">Address</span>
+            <div class="tw-flex tw-flex-col tw-w-full tw-gap-3 tw-p-2">
+                <div class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-3">
+                    <div class="tw-w-full">
+                        <div class="form-floating tw-w-full">
+                            <select id="country" formControlName="country" class="form-select"
+                                [class.is-invalid]="shippementInfoForm.get('country')?.invalid && (shippementInfoForm.get('country')?.dirty || shippementInfoForm.get('country')?.touched)">
+                                <option disabled selected>Select an option</option>
+                                @for(country of countriesList; track country){
+                                <option [value]="country">{{country.name}}</option>
+                                }
+                            </select>
+                            <label for="country">Country<small> *</small></label>
+                        </div>
+                        @if(shippementInfoForm.get('country')?.invalid && (shippementInfoForm.get('country')?.dirty ||
+                        shippementInfoForm.get('country')?.touched)){
+                        <div>
+                            @if(shippementInfoForm.get('country')?.errors?.['required']){
+                            <small class="form-text text-danger">This field is required</small>
+                            }
+                        </div>
+                        }
+                    </div>
+                    <div class="tw-w-full">
+                        <div class="form-floating tw-w-full">
+                            <input id="stateProvince" formControlName="stateProvince" class="form-control"
+                                [class.is-invalid]="shippementInfoForm.get('stateProvince')?.invalid && (shippementInfoForm.get('stateProvince')?.dirty || shippementInfoForm.get('stateProvince')?.touched)"
+                                placeholder="">
+                            <label for="stateProvince">State/province<small> *</small></label>
+                        </div>
+                        @if(shippementInfoForm.get('stateProvince')?.invalid &&
+                        (shippementInfoForm.get('stateProvince')?.dirty ||
+                        shippementInfoForm.get('stateProvince')?.touched)){
+                        <div>
+                            @if(shippementInfoForm.get('stateProvince')?.errors?.['required']){
+                            <small class="form-text text-danger">This field is required</small>
+                            }
+                        </div>
+                        }
+
+                    </div>
+
+                    <div class="tw-w-full">
+                        <div class="form-floating tw-w-full">
+                            <input id="city" formControlName="city" class="form-control"
+                                [class.is-invalid]="shippementInfoForm.get('city')?.invalid && (shippementInfoForm.get('city')?.dirty ||  shippementInfoForm.get('city')?.touched)"
+                                placeholder="">
+                            <label for="city">City<small> *</small></label>
+                        </div>
+                        @if(shippementInfoForm.get('city')?.invalid && (shippementInfoForm.get('city')?.dirty ||
+                        shippementInfoForm.get('city')?.touched)){
+                        <div>
+                            @if(shippementInfoForm.get('city')?.errors?.['required']){
+                            <small class="form-text text-danger">This field is required</small>
+                            }
+                        </div>
+                        }
+                    </div>
+
+                </div>
+
+                <div class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-3 tw-w-full">
+                    <div class="sm:tw-w-[80%] tw-w-full">
+                        <div class="form-floating tw-w-full">
+                            <input id="streetHouse" formControlName="streetHouse" class="form-control"
+                                [class.is-invalid]="shippementInfoForm.get('streetHouse')?.invalid && (shippementInfoForm.get('streetHouse')?.dirty ||  shippementInfoForm.get('streetHouse')?.touched)"
+                                placeholder="">
+                            <label for="streetHouse">Street, house<small> *</small></label>
+                        </div>
+                        @if(shippementInfoForm.get('streetHouse')?.invalid && (shippementInfoForm.get('streetHouse')?.dirty ||
+                        shippementInfoForm.get('streetHouse')?.touched)){
+                        <div>
+                            @if(shippementInfoForm.get('streetHouse')?.errors?.['required']){
+                            <small class="form-text text-danger">This field is required</small>
+                            }
+                        </div>
+                        }
+                    </div>
+                    <div class="sm:tw-w-[20%] tw-w-full">
+                        <div class="tw-w-full">
+                            <div class="form-floating  tw-w-full">
+                                <input id="zipCode" formControlName="zipCode" class="form-control"
+                                    [class.is-invalid]="shippementInfoForm.get('zipCode')?.invalid && (shippementInfoForm.get('zipCode')?.dirty ||
+                                shippementInfoForm.get('zipCode')?.touched)" placeholder="Ex: 10001">
+                                <label for="zipCode">ZIP code<small> *</small></label>
+                            </div>
+                        </div>
+                        @if(shippementInfoForm.get('zipCode')?.invalid && (shippementInfoForm.get('zipCode')?.dirty ||
+                        shippementInfoForm.get('zipCode')?.touched)){
+                        <div>
+                            @if(shippementInfoForm.get('zipCode')?.errors?.['required']){
+                            <small class="form-text text-danger">This field is required</small>
+                            }
+                        </div>
+                        }
+                    </div>
+
+
+                </div>
+
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-primary sm:tw-w-[200px] tw-w-full tw-self-end tw-mt-auto"
+        (click)="onNextClicked()">Next</button>
+</div>

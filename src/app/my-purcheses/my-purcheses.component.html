@@ -1,0 +1,99 @@
+<div class="tw-w-full tw-flex tw-flex-col  ttw-gap-4 tw-bg-gray-100">
+    <div class="tw-flex tw-flex-row tw-items-center tw-w-full tw-p-2 ">
+        <form id="filterForm" role="form" [formGroup]="filterForm" class="tw-flex tw-flex-row tw-gap-2">
+            <select formControlName="status" class="form-select form-select-sm  tw-w-[200px]" (change)="statueChange()">
+                <option value="all">All status</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+                <option value="shipped">Shipped</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+
+            <select formControlName="period" class="form-select form-select-sm tw-w-[200px]" (change)="statueChange()">
+                <option value="all">All time</option>
+                <option value="lastMonth">Last month</option>
+                <option value="lastSixMonth">Last six month</option>
+                <option value="lastYear">Last year</option>
+            </select>
+        </form>
+
+    </div>
+    <div class="tw-flex tw-flex-col tw-gap-4 tw-h-full">
+        @for(order of orders; track order.id){
+        <div class="tw-flex tw-flex-col tw-gap-2 tw-p-4 tw-shadow tw-shadow-opacity-50 tw-bg-white">
+            <div class="tw-flex tw-flex-row">
+                <div class="tw-flex tw-flex-col">
+                    <span> Order :{{order.id}}</span>
+                    <small class="tw-mt-[-5px]">{{order.date | date:'M/d/yy, h:mm a'}}</small>
+                </div>
+                <span class="tw-ms-auto tw-text-sm">Statue : {{order.status}}</span>
+            </div>
+            <div class="tw-flex sm:tw-flex-row tw-flex-col ttw-w-full tw-gap-4 ">
+                <div class="tw-flex tw-flex-col tw-gap-1 tw-border tw-border-gray-300 tw-rounded-xl tw-p-4 tw-w-full">
+                    @for(orderItem of order.orderItems; track orderItem.id){
+
+                    <div id="orderItem" class="tw-flex tw-flex-row tw-gap-2 tw-w-ful">
+                        <div id="colorPhoto" class="tw-bg-gray-100 tw-rounded-lg tw-w-[100px] tw-h-[100px]">
+                            <img [src]="orderItem.colorPhotoUrl"
+                                class="tw-w-[100px] tw-h-[100px] tw-min-w-[100px] tw-min-h-[100px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
+                        </div>
+                        <div id="information" class="tw-flex tw-flex-col tw-gap-2 tw-w-full tw-max-w-full">
+                            <div class="tw-flex tw-flex-col ">
+                                <div class="tw-flex tw-flex-row">
+                                    <span
+                                        class="ttw-whitespace-nowrap ttw-text-ellipsis ttw-truncate ttw-overflow-hidden">{{orderItem.itemName}}</span>
+
+                                </div>
+
+                                <span class="tw-font-bold tw-text-xs">{{orderItem.color}}/{{orderItem.size}}</span>
+                            </div>
+                            <div class="tw-flex tw-flex-w tw-w-full">
+                                <span class="tw-font-bold">${{orderItem.totalPrice | number:'1.2-2'}}</span>
+                                <i class="bi bi-plus-circle"></i>
+                                <div class="tw-flex tw-flex-row tw-ms-auto tw-gap-2 tw-items-center">
+
+                                    <span class="tw-text-sm tw-font-bold">x{{orderItem.quantity}}</span>
+
+                                </div>
+                            </div>
+                            <div id="item-shipping-coast">
+                                <small>Shipping:</small>
+                                <span class="tw-font-bold">
+                                    @if(orderItem.totalShipping!=0){
+                                    ${{orderItem.totalShipping | number:'1.2-2'}}
+                                    }
+                                    @else{
+                                    free
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tw-full tw-opacity-50 tw-bg-gray-100">
+                        <hr class="hr tw-w-full hr-blurry" />
+                    </div>
+                    }
+                </div>
+                <div id="summary"
+                    class="tw-flex tw-flex-col sm:tw-w-[400px] tw-w-full tw-max-h-[250px] tw-border tw-border-gray-300 tw-rounded-xl tw-p-4 tw-gap-4">
+                    <span class="tw-text-xl tw-font-bold tw-mb-4">Summary</span>
+                    <div class="tw-flex tw-flex-row">
+                        <span>SubTotal</span>
+                        <span class="tw-ms-auto">{{order.subTotal | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="tw-flex tw-flex-row">
+                        <span>Shipping cost</span>
+                        <span class="tw-ms-auto">${{order.totalShipping | number:'1.2-2' }}</span>
+                    </div>
+
+                    <div class="tw-flex tw-flex-row tw-font-bold">
+                        <span>Total</span>
+                        <span class="tw-ms-auto">{{order.totalPrice | number:'1.2-2' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        }
+    </div>
+</div>
