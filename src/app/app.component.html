@@ -27,10 +27,13 @@
         <div class="input-group ">
           <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search" aria-label="Search"
             aria-describedby="search-icon">
-          <button class="btn btn-outline-secondary" type="button" id="search-icon"
-            [routerLink]="['/item/item-list']"
+          <button class="btn btn-outline-secondary" type="button" id="search-icon" [routerLink]="['/item/item-list']"
             [queryParams]="{search:search}">
-            <fa-icon [icon]="faSearch"></fa-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
           </button>
         </div>
 
@@ -47,21 +50,6 @@
           <span class="visually-hidden">unread messages</span>
         </span>
       </button>
-      <!-- <div class="dropdown tw-order-last">
-        <button id="account-dropdown" class="btn btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle"
-            viewBox="0 0 16 16">
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-          </svg>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="account-dropdown">
-          <li><a class="dropdown-item">My purchases</a></li>
-        </ul>
-      </div> -->
-
-
       <div ngbDropdown class="d-inline-block tw-order-last tw-me-2" placement="bottom-right" display="dynamic">
         <button type="button" class="btn btn-icon" id="dropdownBasic2" ngbDropdownToggle>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle"
@@ -76,27 +64,6 @@
           <button ngbDropdownItem>Connexion</button>
         </div>
       </div>
-
-
-
-
-      <!-- <div ngbDropdown class="d-inline-block order-last">
-        <button type="button" class="btn btn-icon" id="dropdownBasic1" ngbDropdownToggle>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle"
-            viewBox="0 0 16 16">
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-          </svg>
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem>Action - 1</button>
-          <button ngbDropdownItem>Another Action</button>
-          <button ngbDropdownItem>Something else is here</button>
-        </div>
-      </div> -->
-
-
     </nav>
     <div class="tw-full tw-opacity-50">
       <hr class="hr tw-w-full hr-blurry" />

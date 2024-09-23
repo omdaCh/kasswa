@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { IOrder, Order } from "./order.model";
 import { Observable } from "rxjs";
-import { JSON_SERVER_URL } from "../app.constants";
+import { SERVER_URL, JSON_SERVER_URL } from "../app.constants";
 
 
 @Injectable({ providedIn: 'root' })
@@ -11,11 +11,11 @@ export class OrderService {
     private httpClient: HttpClient = inject(HttpClient);
 
     public saveNewOrder(newOrder: Order): Observable<Order> {
-        return this.httpClient.post<Order>(JSON_SERVER_URL + "/orders", newOrder)
+        return this.httpClient.post<Order>(SERVER_URL + "/orders/newOrder", newOrder)
     }
 
     public getAllOrders(): Observable<Order[]> {
-        return this.httpClient.get<Order[]>(JSON_SERVER_URL + "/orders");
+        return this.httpClient.get<Order[]>(SERVER_URL + "/orders");
     }
 
     getOrders(status_: string, period: string): Observable<IOrder[]> {
@@ -30,8 +30,8 @@ export class OrderService {
             case 'all': fromDate = null;
         }
 
-        const params = { status: status_ };
+        const params = { status: status_, period: period };
 
-        return this.httpClient.get<IOrder[]>(JSON_SERVER_URL + "/orders?", { params });
+        return this.httpClient.get<IOrder[]>(SERVER_URL + "/orders", { params });
     }
 }

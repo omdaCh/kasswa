@@ -39,7 +39,7 @@ export class ItemDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.queryParamMap.subscribe((params) => {
-      const id: number = Number(params.get("id"));
+      const id: string | null = params.get("id");
       if (id !== null) {
         this.itemService.find(id).subscribe((item_) => {
           this.item = item_;

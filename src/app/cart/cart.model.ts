@@ -18,7 +18,7 @@ import { IItem } from "../item/item.model";
 export class CartItem {
     constructor(
         // public item: IItem,
-        public itemId: number,
+        public itemId: string,
         public itemName:string,
         public quantity: number,
         public price: number,

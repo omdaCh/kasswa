@@ -6,11 +6,11 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, UntypedFormGroup } from 
 
 @Component({
     selector: 'my-purcheses',
-    templateUrl: './my-purcheses.component.html',
+    templateUrl: './orders.component.html',
     standalone: true,
     imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class MyPurchasesComponent implements OnInit {
+export class OrdersComponent implements OnInit {
 
     orderService: OrderService = inject(OrderService);
     orders!: Order[];

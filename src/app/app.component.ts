@@ -1,7 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee, faBagShopping, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from './cart/cart.service';
 import { FormsModule } from '@angular/forms';
@@ -15,22 +14,16 @@ import { FormsModule } from '@angular/forms';
 
 })
 export class AppComponent implements OnInit {
+  
   title = 'e-commerce';
 
   route: ActivatedRoute = inject(ActivatedRoute);
+  cartService:CartService = inject(CartService);
 
-  faCoffee = faCoffee;
-  faBagShopping = faBagShopping;
-  faCartShopping = faCartShopping;
-  faSearch = faSearch;
 
   isNavbarCollapsed = signal(true);
 
   search: string | null = '';
-
-  constructor(public cartService: CartService,) {
-
-  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
@@ -47,8 +40,3 @@ export class AppComponent implements OnInit {
   }
 
 }
-
-export interface BreadCrumb {
-  label: string;
-  url: string;
-};

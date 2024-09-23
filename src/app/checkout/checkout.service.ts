@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { IOrder, Order, OrderItem } from "../my-purcheses/order.model";
+import { IOrder, Order, OrderItem } from "../orders/order.model";
 import { CartItem, ShoppingCart } from "../cart/cart.model";
 import { CartService } from "../cart/cart.service";
 import { Observable } from "rxjs";
-import { OrderService } from "../my-purcheses/order.service";
+import { OrderService } from "../orders/order.service";
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {

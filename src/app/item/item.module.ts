@@ -21,9 +21,6 @@ const routes: Routes = [
   },
   {
     path: "item-detail",
-    // resolve: {
-    //   item: itemResolve
-    // },
     component: ItemDetailComponent,
   }
 ];

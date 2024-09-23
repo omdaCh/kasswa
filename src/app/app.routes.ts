@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
-import { MyPurchasesComponent } from './my-purcheses/my-purcheses.component';
+import { OrdersComponent } from './orders/orders.component';
+
 
 export const routes: Routes = [
     {
@@ -23,6 +24,6 @@ export const routes: Routes = [
     },
     {
         path:'my-purchases',
-        component: MyPurchasesComponent
+        component: OrdersComponent
     }
 ]

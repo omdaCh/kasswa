@@ -5,7 +5,7 @@ export type ItemColor = { colorName: string, sizes: ItemSize[], photos: string[]
 export type ItemBrand = { name: string, photoUrl: string }
 
 export interface IItem {
-  id: number;
+  id: string;
   name: string;
   description: string;
   colors: ItemColor[];

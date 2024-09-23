@@ -1,8 +1,8 @@
-import { Injectable, inject } from "@angular/core";
-import { Observable, map, of } from "rxjs";
+import { Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
 import { IItem } from "./item.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { JSON_SERVER_URL } from "../app.constants";
+import { SERVER_URL } from "../app.constants";
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,11 +12,11 @@ export class ItemService {
 
 
     getItems(): Observable<IItem[]> {
-        return this.httpClient.get<IItem[]>(JSON_SERVER_URL + "/items");
+        return this.httpClient.get<IItem[]>(SERVER_URL + "/items");
     }
 
-    find(id: number): Observable<IItem> {
-        return this.httpClient.get<IItem>(JSON_SERVER_URL + "/items/" + id);
+    find(id: string): Observable<IItem> {
+        return this.httpClient.get<IItem>(SERVER_URL + "/items/" + id);
     }
 
     getItemsOfGenderAge(gender_: string | null, age_: string | null): Observable<IItem[]> {
@@ -28,16 +28,16 @@ export class ItemService {
         if (age_ !== null && age_ !== undefined) {
             params = params.append('age', age_);
         }
-        return this.httpClient.get<IItem[]>(JSON_SERVER_URL + "/items", { params });
+        return this.httpClient.get<IItem[]>(SERVER_URL + "/items", { params });
     }
 
-    searchItems(search: string): Observable<IItem[]> {
+    searchItems(searchText: string): Observable<IItem[]> {
         //I filtered the items manually since the json-server don't have a filtering option
-        return this.httpClient.get<IItem[]>(JSON_SERVER_URL + "/items").pipe(map(items => items.filter(item => item.name.includes(search))));
+        return this.httpClient.get<IItem[]>(SERVER_URL + "/items/search/" + searchText);
     }
 
     getSimilarItemsOfItem(item: IItem): Observable<IItem[]> {
         const params = { gender: item.gender, age: item.age, _page: 1, _limit: 5 };
-        return this.httpClient.get<IItem[]>(JSON_SERVER_URL + "/items", { params });
+        return this.httpClient.get<IItem[]>(SERVER_URL + "/items", { params });
     }
 }

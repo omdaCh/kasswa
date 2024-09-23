@@ -42,9 +42,9 @@ export interface IOrderItem {
 
 export class OrderItem {
     constructor(
-        public id: number,
+        public id: string,
         public orderId: number,
-        public itemId: number,
+        public itemId: string,
         public itemName: string,
         public color: string,
         public colorPhotoUrl: string,

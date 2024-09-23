@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { IItem } from '../item.model';
 import { ItemService } from '../items.service';
-import { faCartShopping, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { ActivatedRoute } from '@angular/router';
 import { getDiscountPercentage } from '../../tools/tools';
-import { CartService } from '../../cart/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/item-about-adding-to-cart.component';
 
@@ -16,8 +14,6 @@ import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/ite
 export class ItemListComponent implements OnInit {
 
   items: IItem[] = [];
-  faCartShopping = faCartShopping;
-  faShoppingCart = faShoppingCart;
 
   getDiscountPercentage = getDiscountPercentage;
 
