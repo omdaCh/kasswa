@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbCarousel, NgbCarouselModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ItemAboutAddingToCartComponent } from './item-about-adding-to-cart/item-about-adding-to-cart.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
   declarations: [ItemListComponent, ItemDetailComponent, ItemAboutAddingToCartComponent],
   imports: [
     RouterModule, RouterOutlet, CommonModule, RouterModule.forChild(routes), NgbRatingModule, FontAwesomeModule,
-    NgbCarousel, NgbCarouselModule
+    NgbCarousel, NgbCarouselModule, NgxSkeletonLoaderModule
   ],
   providers: [HttpClientModule]
 })

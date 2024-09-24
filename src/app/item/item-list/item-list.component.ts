@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { getDiscountPercentage } from '../../tools/tools';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/item-about-adding-to-cart.component';
+import { finalize, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'item-list-component',
@@ -14,6 +15,7 @@ import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/ite
 export class ItemListComponent implements OnInit {
 
   items: IItem[] = [];
+  itemsAreLoading: boolean = false;
 
   getDiscountPercentage = getDiscountPercentage;
 
@@ -25,30 +27,40 @@ export class ItemListComponent implements OnInit {
 
   private modalService: NgbModal = inject(NgbModal);
 
+
   ngOnInit(): void {
-    this.items = []
-    this.route.queryParamMap.subscribe((params) => {
-      const gender = params.get('gender');
-      const age = params.get('age');
-      const search = params.get('search');
-      if (gender || age) {
-        this.itemService.getItemsOfGenderAge(gender, age).subscribe(items => {
-          this.items = items;
-        })
-      } else if (search) {
-        this.itemService.searchItems(search).subscribe(items => {
-          this.items = items;
-        })
-      } else {
-        this.itemService.getItems().subscribe(items => {
-          this.items = items;
-        })
-      }
-      if (this.mainContainer) {
-        this.mainContainer.nativeElement.scrollTop = 0;
-      }
+  
+    this.route.queryParamMap.pipe(
+      switchMap(params => {
+        this.items = [];
+        this.itemsAreLoading = true;
+        const gender = params.get('gender');
+        const age = params.get('age');
+        const search = params.get('search');
+
+        // Determine the appropriate item fetching method
+        if (gender || age) {
+          return this.itemService.getItemsOfGenderAge(gender, age);
+        } else if (search) {
+          return this.itemService.searchItems(search);
+        } else {
+          return this.itemService.getItems();
+        }
+      })
+    ).subscribe(items => {
+      this.items = items;
+      this.itemsAreLoading = false
+      this.scrollToTop();
     });
   }
+
+  // Scroll to the top of the container
+  private scrollToTop(): void {
+    if (this.mainContainer) {
+      this.mainContainer.nativeElement.scrollTop = 0;
+    }
+  }
+
 
   onAddToCartClick(event: Event, item: IItem): void {
     event.stopPropagation();

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { IOrder, Order } from "./order.model";
 import { Observable } from "rxjs";
-import { SERVER_URL, JSON_SERVER_URL } from "../app.constants";
+import { SERVER_URL } from "../app.constants";
 
 
 @Injectable({ providedIn: 'root' })
