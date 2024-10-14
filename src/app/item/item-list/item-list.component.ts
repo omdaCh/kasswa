@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { IItem } from '../item.model';
-import { ItemService } from '../items.service';
+import { ItemService } from '../item.service';
 import { ActivatedRoute } from '@angular/router';
 import { getDiscountPercentage } from '../../tools/tools';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/item-about-adding-to-cart.component';
-import { finalize, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'item-list-component',

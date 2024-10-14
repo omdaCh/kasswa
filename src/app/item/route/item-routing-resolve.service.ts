@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Router } from "@angular/router";
 import { IItem } from "../item.model";
 import { Observable } from "rxjs/internal/Observable";
 import { EMPTY, mergeMap, of } from "rxjs";
-import { ItemService } from "../items.service";
+import { ItemService } from "../item.service";
 
 
 

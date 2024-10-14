@@ -1,4 +1,34 @@
 <div #mainContainer class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-overflow-x-auto tw-h-full">
+    @if(itemIsLoading){
+    <div class="tw-flex sm:tw-flex-row tw-flex-col tw-w-full tw-gap-3 tw-p-1">
+        <div class="tw-w-full tw-aspect-square tw-max-h-[400px] sm:tw-max-w-[400px]">
+            <ngx-skeleton-loader [theme]="{ 
+             width: '100%',
+             height: '100%',
+              'border-radius':'0.75rem;'
+            }"></ngx-skeleton-loader>
+        </div>
+        <div class="tw-w-full">
+            <ngx-skeleton-loader [theme]="{ 
+        width: '100%',
+        height: '15px',
+         'aspect-ratio': '0.6',
+       }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 
+            width: '80%',
+            height: '15px',
+             'aspect-ratio': '0.6',
+           }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 
+            width: '90%',
+            height: '15px',
+             'aspect-ratio': '0.6',
+           }"></ngx-skeleton-loader>
+
+        </div>
+
+    </div>
+    }@else {
     @if(item){
     <div class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-4">
         <div id="item-photo"
@@ -80,7 +110,7 @@
                     @for(size of colorSelected?.sizes; track size){
                     <div class="tw-flex tw-rounded-xl tw-w-[70px] tw-min-w-[70px] tw-h-[30px] tw-justify-center tw-cursor-pointer"
                         [ngClass]="[sizeSelected === size ? 'tw-border-2 tw-border-gray-500' : 'tw-border-[1px] tw-border-gray-300 hover:tw-border-gray-500',
-                                     size.available.toString()==='true' ? 'tw-opacity-100' : 'tw-pointer-events-none tw-opacity-50']"
+                                             size.available.toString()==='true' ? 'tw-opacity-100' : 'tw-pointer-events-none tw-opacity-50']"
                         (click)="sizeSelected=size">
                         <span>{{size.name}}</span>
                     </div>
@@ -129,15 +159,14 @@
     <div class="tw-full tw-opacity-50">
         <hr class="hr tw-w-full hr-blurry" />
     </div>
-    
+
     @if(similairItems.length!=0){
     <div class="tw-flex tw-flex-col">
         <span>Similar items</span>
-        <div class="tw-flex tw-flex-row tw-gap-4 tw-overflow-y-auto"
-            id="similarItems">
+        <div class="tw-flex tw-flex-row tw-gap-4 tw-overflow-y-auto" id="similarItems">
             @for(similarItem of similairItems; track similarItem.id){
             <div id="item" class="tw-flex tw-flex-col tw-cursor-pointer tw-max-w-[150px] tw-w-[150px] "
-                [routerLink]="['/item/item-detail']" [queryParams]="{id:similarItem.id}" >
+                [routerLink]="['/item/item-detail']" [queryParams]="{id:similarItem.id}">
                 <div
                     class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative tw-min-w-[150px]">
                     @if(similarItem.colors[0].photos[0]){
@@ -159,7 +188,8 @@
                         <span class="tw-font-bold tw-mt-2 tw-mb-2">${{similarItem?.price}}</span>
                         }
                     </div>
-                    <button class="btn btn-rounded tw-ms-auto" (click)="onSimilarItemAddToCartClick($event,similarItem)">
+                    <button class="btn btn-rounded tw-ms-auto"
+                        (click)="onSimilarItemAddToCartClick($event,similarItem)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-cart-plus" viewBox="0 0 16 16">
                             <path
@@ -174,8 +204,7 @@
         </div>
     </div>
     }
-
-
-
     }
+    }
+
 </div>

@@ -3,7 +3,7 @@ import { IItem, ItemColor, ItemSize } from '../item.model';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbCarousel } from '@ng-bootstrap/ng-bootstrap'
 import { getDiscountPercentage } from '../../tools/tools';
-import { ItemService } from '../items.service';
+import { ItemService } from '../item.service';
 import { CartService } from '../../cart/cart.service';
 
 

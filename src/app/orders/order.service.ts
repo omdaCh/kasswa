@@ -19,19 +19,7 @@ export class OrderService {
     }
 
     getOrders(status_: string, period: string): Observable<IOrder[]> {
-        status_ = (status_ == 'all' ? '' : status_);
-        let currentDate: Date = new Date();
-        let fromDate: Date | null = new Date();
-
-        switch (period) {
-            case 'lastMonth': fromDate.setDate(currentDate.getDate() - 30); break;
-            case 'lastSixMonth': fromDate.setMonth(currentDate.getMonth() - 6); break;
-            case 'lastYear': fromDate.setFullYear(currentDate.getFullYear() - 1); break;
-            case 'all': fromDate = null;
-        }
-
         const params = { status: status_, period: period };
-
         return this.httpClient.get<IOrder[]>(SERVER_URL + "/orders", { params });
     }
 }

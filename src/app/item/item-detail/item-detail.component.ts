@@ -3,9 +3,10 @@ import { IItem, ItemColor, ItemSize } from '../item.model';
 import { ActivatedRoute } from '@angular/router';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { getDiscountPercentage } from '../../tools/tools';
-import { ItemService } from '../items.service';
+import { ItemService } from '../item.service';
 import { CartService } from '../../cart/cart.service';
 import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/item-about-adding-to-cart.component';
+import { catchError, filter, finalize, map, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 
 @Component({
@@ -36,27 +37,46 @@ export class ItemDetailComponent implements OnInit {
 
   private modalService: NgbModal = inject(NgbModal);
 
+  itemIsLoading: boolean = false;
+
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.activeRoute.queryParamMap.subscribe((params) => {
-      const id: string | null = params.get("id");
-      if (id !== null) {
-        this.itemService.find(id).subscribe((item_) => {
-          this.item = item_;
-          this.selectedPhotoUrl = this.item?.colors[0].photos[0];
-          this.colorSelected = this.item?.colors[0];
-          if (this.item?.gender && this.item.age) {
-            this.itemService.getSimilarItemsOfItem(this.item).subscribe(similairItems => {
-              this.similairItems = similairItems;
-            })
-          }
-        });
-        if (this.mainContainer) {
-          this.mainContainer.nativeElement.scrollTop = 0;
-        }
-      }
+    this.itemIsLoading = true;
+    this.activeRoute.queryParamMap.pipe(
+      map(params => params.get('id')),
+      filter((id): id is string => id !== null),
+      tap(() => this.scrollToTop()),
+      switchMap(id => this.itemService.find(id)),
+      tap(item => this.updateItemDetails(item)),
+      tap(() => this.itemIsLoading = false),
+      filter(item => !!item.gender && !!item.age),
+      switchMap(item => this.itemService.getSimilarItemsOfItem(item)),
+      tap(similarItems => this.similairItems = similarItems),
+      catchError(error => {
+        console.error('Error fetching item or similar items:', error);
+        return of([] as IItem[]); // Return an empty array on error
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe();
+  }
 
-    });
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private updateItemDetails(item: IItem): void { // Replace 'any' with your actual item type
+    this.item = item;
+    this.selectedPhotoUrl = item?.colors[0]?.photos[0];
+    this.colorSelected = item?.colors[0];
+  }
+
+  private scrollToTop(): void {
+    if (this.mainContainer) {
+      this.mainContainer.nativeElement.scrollTop = 0;
+    }
   }
 
   selectedColor(selectedColor: ItemColor) {
