@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent implements OnInit {
   
   title = 'e-commerce';
+  
 
   route: ActivatedRoute = inject(ActivatedRoute);
   cartService:CartService = inject(CartService);
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   search: string | null = '';
 
   ngOnInit() {
+    console.log("qdfqqqqqq");
     this.route.queryParamMap.subscribe((params) => {
       this.search = params.get('search');
     })
