@@ -22,14 +22,14 @@ export class CartComponent {
     const modalRef = this.modalService.open(RemoveCartItemComponent,{ centered: true, }).result.then(
 			(result) => {
 				if(result='confirm'){
-          this.cartService.shoppingCart.removeItem(cartItemToRemove);
+          this.cartService.removeItem(cartItemToRemove);
         }
 			}
 		);
   }
 
   incrementQuantity(cartItem:CartItem):void{
-    this.cartService.shoppingCart.setCartItemQuantity(cartItem,cartItem.quantity += 1);
+    this.cartService.setCartItemQuantity(cartItem,cartItem.quantity += 1);
   }
 
   decrementQuantity(cartItem:CartItem):void{
@@ -37,7 +37,7 @@ export class CartComponent {
       this.removeCartItem(cartItem)
     }
     else{
-      this.cartService.shoppingCart.setCartItemQuantity(cartItem,cartItem.quantity - 1);
+      this.cartService.setCartItemQuantity(cartItem,cartItem.quantity - 1);
     }
   }
 }
