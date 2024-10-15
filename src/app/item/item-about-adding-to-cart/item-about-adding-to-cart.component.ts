@@ -75,7 +75,7 @@ export class ItemAboutAddingToCartComponent implements OnInit {
 
   addToCart(): void {
     if (this.item && this.colorSelected && this.sizeSelected) {
-      this.cartService.shoppingCart.addItem(this.item, this.colorSelected.colorName, this.sizeSelected.name, 1)
+      this.cartService.addItem(this.item, this.colorSelected.colorName, this.sizeSelected.name, 1)
       this.activeModal.close();
     }
   }

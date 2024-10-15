@@ -101,7 +101,7 @@ export class CheckoutComponent implements OnInit {
         this.checkoutService.confirmCheckout().subscribe({
             next: resp => {
                 this.checkOutConfirmed = true;
-                this.cartService.shoppingCart.removeAllItems();
+                this.cartService.removeAllItems();
             },
             error: err => {
                 console.log(err);
