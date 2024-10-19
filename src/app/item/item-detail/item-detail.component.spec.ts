@@ -6,7 +6,9 @@ import { ActivatedRoute, convertToParamMap, RouterModule } from "@angular/router
 import { of, Subject } from "rxjs";
 import { IItem } from "../item.model";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
-import { NgbCarouselModule, NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbCarouselModule, NgbModal, NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
+import { ItemAboutAddingToCartComponent } from "../item-about-adding-to-cart/item-about-adding-to-cart.component";
+
 
 
 describe('Item detail component', () => {
@@ -16,6 +18,7 @@ describe('Item detail component', () => {
     let activatedRouteMock: any;
     let itemServiceMock: jasmine.SpyObj<ItemService>;
     let cartServiceMock: jasmine.SpyObj<CartService>;
+    let modalServiceMock: jasmine.SpyObj<NgbModal>;
 
     const itemMock: IItem = {
         id: '1',
@@ -173,6 +176,9 @@ describe('Item detail component', () => {
 
     beforeEach(async () => {
         itemServiceMock = jasmine.createSpyObj('ItemService', ['find', 'getSimilarItemsOfItem']);
+        cartServiceMock = jasmine.createSpyObj('CartService', ['addItem']);
+        modalServiceMock = jasmine.createSpyObj('NgbModal', ['open']);
+
 
         activatedRouteMock = {
             queryParamMap: of(convertToParamMap({ id: '1' }))
@@ -182,7 +188,8 @@ describe('Item detail component', () => {
             declarations: [ItemDetailComponent],
             providers: [{ provide: ItemService, useValue: itemServiceMock },
             { provide: ActivatedRoute, useValue: activatedRouteMock },
-            { provide: CartService, useValue: cartServiceMock }
+            { provide: CartService, useValue: cartServiceMock },
+            { provide: NgbModal, useValue: modalServiceMock }
             ],
             imports: [NgxSkeletonLoaderModule, NgbCarouselModule, NgbRatingModule, RouterModule]
 
@@ -231,11 +238,77 @@ describe('Item detail component', () => {
         expect(itemDetailComponent.mainContainer.nativeElement.scrollTop).toBe(0);
     });
 
+    it('should call cartService.addItem when all inputs are set, otherwise not call', () => {
 
-    it('Should add item to shoppingcart when on addToCart', () => {
-        fixture.detectChanges();
-        itemDetailComponent.addToCart();
-        expect()
+        let colorSelectedMock = itemMock.colors[0];
+        let sizeSelectedMock = itemMock.colors[0].sizes[0];
+
+        const testCases = [
+            {
+                description: 'should call addItem when all inputs are set',
+                item: itemMock,
+                colorSelected: colorSelectedMock,
+                sizeSelected: sizeSelectedMock,
+                expectedCall: true
+            },
+            {
+                description: 'should not call addItem when item is null',
+                item: undefined,
+                colorSelected: colorSelectedMock,
+                sizeSelected: sizeSelectedMock,
+                expectedCall: false
+            },
+            {
+                description: 'should not call addItem when colorSelected is null',
+                item: itemMock,
+                colorSelected: undefined,
+                sizeSelected: sizeSelectedMock,
+                expectedCall: false
+            },
+            {
+                description: 'should not call addItem when sizeSelected is null',
+                item: itemMock,
+                colorSelected: colorSelectedMock,
+                sizeSelected: undefined,
+                expectedCall: false
+            }
+        ];
+
+        testCases.forEach(testCase => {
+            // Set component inputs based on the test case
+            itemDetailComponent.item = testCase.item;
+            itemDetailComponent.colorSelected = testCase.colorSelected;
+            itemDetailComponent.sizeSelected = testCase.sizeSelected;
+
+            // Clear any previous calls to cartService.addItem
+            cartServiceMock.addItem.calls.reset();
+
+            // Act
+            itemDetailComponent.addToCart();
+
+            // Assert
+            if (testCase.expectedCall) {
+                expect(cartServiceMock.addItem).toHaveBeenCalledWith(testCase.item!, testCase.colorSelected!.colorName, testCase.sizeSelected!.name, 1);
+            } else {
+                expect(cartServiceMock.addItem).not.toHaveBeenCalled();
+            }
+        });
     });
+
+
+    it('Should open dialog when one of similar item is added to cart', () => {
+        const modalRefMock = {
+            componentInstance: { itemId: '' }, // Initial empty object
+        };
+
+        modalServiceMock.open.and.returnValue(modalRefMock as any);
+
+        itemDetailComponent.onSimilarItemAddToCartClick(itemMock);
+        expect(modalServiceMock.open).toHaveBeenCalledWith(ItemAboutAddingToCartComponent,{ centered: true, windowClass: 'full-width-modal' });
+        expect(modalRefMock.componentInstance.itemId).toEqual(itemMock.id);
+
+    });
+
+    
 
 })

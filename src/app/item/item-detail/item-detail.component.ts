@@ -16,7 +16,7 @@ import { catchError, filter, finalize, map, of, Subject, switchMap, takeUntil, t
 export class ItemDetailComponent implements OnInit {
 
 
-  @Input() item: IItem | null = null;
+  @Input() item: IItem | undefined;
 
   colorSelected?: ItemColor;
   sizeSelected?: ItemSize;
@@ -93,9 +93,7 @@ export class ItemDetailComponent implements OnInit {
     if (offset > 100) this.carousel.next();
   }
 
-  onClick(event: Event): void {
-    event.stopPropagation();
-  }
+
 
   addToCart(): void {
     if (this.item && this.colorSelected && this.sizeSelected) {
@@ -103,8 +101,7 @@ export class ItemDetailComponent implements OnInit {
     }
   }
 
-  onSimilarItemAddToCartClick(event: Event, item: IItem): void {
-    event.stopPropagation();
+  onSimilarItemAddToCartClick( item: IItem): void {
     const modelRef = this.modalService.open(ItemAboutAddingToCartComponent, { centered: true, windowClass: 'full-width-modal' });
     modelRef.componentInstance.itemId = item.id;
   }

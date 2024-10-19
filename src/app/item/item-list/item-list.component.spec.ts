@@ -128,8 +128,6 @@ describe('ItemListComponent', () => {
 
         const modalRefMock = {
             componentInstance: { itemId: '' }, // Initial empty object
-            close: jasmine.createSpy('close'),
-            dismiss: jasmine.createSpy('dismiss')
         };
 
         modalServiceMock.open.and.returnValue(modalRefMock as any);

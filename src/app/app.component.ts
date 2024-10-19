@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
   search: string | null = '';
 
   ngOnInit() {
-    console.log("qdfqqqqqq");
     this.route.queryParamMap.subscribe((params) => {
       this.search = params.get('search');
     })

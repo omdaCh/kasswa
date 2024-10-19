@@ -10,30 +10,13 @@ export class CartService {
     constructor() {
     }
 
-    // Method to add an item to the cart
-    addCartItem(_cartItem: CartItem): void {
-
-        this.shoppingCart.totalQuantity = 5;
-
-        const existingItem = this.shoppingCart.cartItems.find(cartItem => cartItem?.itemId === _cartItem.itemId && cartItem.color === _cartItem.color && cartItem.size === _cartItem.size);
-
-        if (existingItem) {
-            existingItem.quantity += _cartItem.quantity;
-            existingItem.totalPrice += _cartItem.totalPrice;
-        } else {
-            this.shoppingCart.cartItems.push(_cartItem);
-        }
-
-        this.updateCart();
-    }
 
     addItem(item: IItem, selectedColor: string, selectedSize: string, quantity: number): void {
 
         const existingItem = this.shoppingCart.cartItems.find(cartItem => cartItem?.itemId === item.id && cartItem.color === selectedColor && cartItem.size === selectedSize);
 
         if (existingItem) {
-            existingItem.quantity += 1;
-            existingItem.totalPrice += existingItem.price * existingItem.quantity;
+            this.setCartItemQuantity(existingItem,existingItem.quantity +1);
         } else {
             //create new cart item
             let photoUrl = item.colors.find(itemColor => itemColor.colorName == selectedColor)?.photos[0];
@@ -50,34 +33,28 @@ export class CartService {
 
     setCartItemQuantity(cartItem: CartItem, quantity: number): void {
         cartItem.quantity = quantity;
-        this.updateCartItemOnQantityChange(cartItem);
+        this.computeAndSetCartItemCosts(cartItem);
         this.updateCart();
     }
 
-    private updateCartItemOnQantityChange(cartItem: CartItem): void {
+    private computeAndSetCartItemCosts(cartItem: CartItem): void {
         cartItem.totalPrice = cartItem.price * cartItem.quantity;
         cartItem.totalShipping = cartItem.shippingCoast * cartItem.quantity;
     }
 
     // Method to remove an item from the cart
-    removeItem(_cartItem: CartItem): void {
+    removeCartItem(_cartItem: CartItem): void {
         this.shoppingCart.cartItems = this.shoppingCart.cartItems.filter(cartItem => !(cartItem.itemId === _cartItem.itemId && cartItem.color === _cartItem.color && cartItem.size === _cartItem.size));
         this.updateCart();
     }
 
-    removeAllItems(): void {
+    emptyTheCart(): void {
         this.shoppingCart.cartItems = [];
         this.updateCart();
     }
 
-    setItemNbr(_cartItem: CartItem, quantity: number): void {
-        let cartItem = this.shoppingCart.cartItems.find(cartItem => (cartItem.itemId === _cartItem.itemId && cartItem.color === _cartItem.color && cartItem.size === _cartItem.size));
-        if (cartItem)
-            cartItem.quantity = quantity;
-    }
-
     // Method to calculate and update the total quantity and price
-    updateCart(): void {
+    private updateCart(): void {
         this.shoppingCart.totalQuantity = this.shoppingCart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
         this.shoppingCart.totalPrice = this.shoppingCart.cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
         this.shoppingCart.totalQuantity = 0;

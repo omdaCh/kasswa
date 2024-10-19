@@ -29,7 +29,6 @@ export class ItemAboutAddingToCartComponent implements OnInit {
   @ViewChild('mainContainer')
   mainContainer!: ElementRef
 
-  private activeRoute: ActivatedRoute = inject(ActivatedRoute);
   private itemService: ItemService = inject(ItemService);
   private cartService: CartService = inject(CartService);
 
