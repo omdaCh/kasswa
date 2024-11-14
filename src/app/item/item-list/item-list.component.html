@@ -1,119 +1,129 @@
-<div #mainContainer class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
+<div class="tw-overflow-auto tw-flex tw-flex-col tw-h-full">
+    <span id="list-title" class=" tw-pl-5 tw-pt-3 tw-pb-[-5px] tw-text-sm tw-opacity-70">{{filtredListTitle}}</span>
     @if(itemsAreLoading){
-    <div class="tw-aspect-[0.7]">
-        <div class="tw-aspect-square">
-            <ngx-skeleton-loader [theme]="{ 
+    <div #mainContainer id="skeletonsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
+        <div class="tw-aspect-[0.7]">
+            <div class="tw-aspect-square">
+                <ngx-skeleton-loader [theme]="{ 
          width: '100%',
          height: '100%',
           'aspect-ratio': '0.6',
           'border-radius':'0.75rem;'
         }"></ngx-skeleton-loader>
-        </div>
-        <ngx-skeleton-loader [theme]="{ 
+            </div>
+            <ngx-skeleton-loader [theme]="{ 
     width: '100%',
     height: '15px',
      'aspect-ratio': '0.6',
    }"></ngx-skeleton-loader>
-        <ngx-skeleton-loader [theme]="{ 
+            <ngx-skeleton-loader [theme]="{ 
         width: '80%',
         height: '15px',
          'aspect-ratio': '0.6',
        }"></ngx-skeleton-loader>
-    </div>
-    <div class="tw-aspect-[0.7] tw-opacity-[70%]">
-        <div class="tw-aspect-square">
-            <ngx-skeleton-loader [theme]="{ 
+        </div>
+        <div class="tw-aspect-[0.7] tw-opacity-[70%]">
+            <div class="tw-aspect-square">
+                <ngx-skeleton-loader [theme]="{ 
          width: '100%',
          height: '100%',
           'aspect-ratio': '0.6',
           'border-radius':'0.75rem;'
         }"></ngx-skeleton-loader>
-        </div>
-
-
-        <ngx-skeleton-loader [theme]="{ 
-    width: '100%',
-    height: '15px',
-     'aspect-ratio': '0.6',
-   }"></ngx-skeleton-loader>
-        <ngx-skeleton-loader [theme]="{ 
-        width: '80%',
-        height: '15px',
-         'aspect-ratio': '0.6',
-       }"></ngx-skeleton-loader>
-    </div>
-    <div class="tw-aspect-[0.7] tw-opacity-[60%]">
-        <div class="tw-aspect-square">
-            <ngx-skeleton-loader [theme]="{ 
-         width: '100%',
-         height: '100%',
-          'aspect-ratio': '0.6',
-          'border-radius':'0.75rem;'
-        }"></ngx-skeleton-loader>
-        </div>
-
-
-        <ngx-skeleton-loader [theme]="{ 
-    width: '100%',
-    height: '15px',
-     'aspect-ratio': '0.6',
-   }"></ngx-skeleton-loader>
-        <ngx-skeleton-loader [theme]="{ 
-        width: '80%',
-        height: '15px',
-         'aspect-ratio': '0.6',
-       }"></ngx-skeleton-loader>
-    </div>
-
-
-    }@else {
-    @for(item of items; track item.id){
-    <div id="item" class="tw-flex tw-flex-col tw-cursor-pointer  " [routerLink]="['/item/item-detail']"
-        [queryParams]="{id:item.id}">
-        <div class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative">
-            @if(item.colors[0].photos[0]){
-            <img [src]="item.colors[0].photos[0]" class="s-image">
-            }
-        </div>
-        <span class="tw-whitespace-nowrap tw-text-ellipsis tw-overflow-hidden">{{item.name}}</span>
-        <div class="tw-flex tw-flex-row  tw-items-center tw-gap-3">
-            <ngb-rating [rate]="item?.rating || 0" [max]="5" [readonly]="true" />
-            <span class="tw-text-xs">{{item?.nbrSold}} Sold</span>
-        </div>
-        <div class="tw-flex tw-flex-row tw-w-full ">
-            <div class="tw-flex tw-flex-col">
-                <div class="tw-flex tw-flex-row tw-gap-2 tw-items-center">
-                    @if(item && item.discountedPrice){
-                    <span class="ttw-text-2xl tw-font-bold tw-mt-2 tw-mb-2 text-danger">${{item.discountedPrice}}</span>
-                    <span class="tw-line-through tw-font-bold tw-text-sm">${{item.price}}</span>
-                    <span
-                        class="text-danger tw-font-bold ttw-text-lg">-%{{getDiscountPercentage(item.price,item.discountedPrice)}}</span>
-                    }
-                    @else {
-                    <span class="ttw-text-2xl tw-font-bold tw-mt-2 tw-mb-2">${{item?.price}}</span>
-                    }
-                </div>
-                <div class="tw-mt-[-15px]">
-                    @if(item.shippingCoast && item.shippingCoast !=0){
-                    <small>shipping : <span class="tw-font-bold">${{item.shippingCoast}}</span></small>
-                    }@else {
-                    <small>free shipping</small>
-                    }
-
-                </div>
             </div>
 
-            <button id="add-to-cart" class="btn btn-rounded tw-ms-auto" (click)="onAddToCartClick($event,item)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-cart-plus" viewBox="0 0 16 16">
-                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
-                    <path
-                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                </svg>
-            </button>
+
+            <ngx-skeleton-loader [theme]="{ 
+    width: '100%',
+    height: '15px',
+     'aspect-ratio': '0.6',
+   }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 
+        width: '80%',
+        height: '15px',
+         'aspect-ratio': '0.6',
+       }"></ngx-skeleton-loader>
         </div>
+        <div class="tw-aspect-[0.7] tw-opacity-[60%]">
+            <div class="tw-aspect-square">
+                <ngx-skeleton-loader [theme]="{ 
+         width: '100%',
+         height: '100%',
+          'aspect-ratio': '0.6',
+          'border-radius':'0.75rem;'
+        }"></ngx-skeleton-loader>
+            </div>
+
+
+            <ngx-skeleton-loader [theme]="{ 
+    width: '100%',
+    height: '15px',
+     'aspect-ratio': '0.6',
+   }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 
+        width: '80%',
+        height: '15px',
+         'aspect-ratio': '0.6',
+       }"></ngx-skeleton-loader>
+        </div>
+    </div>
+
+    }@else {
+    @if(items.length==0){
+    <div class="tw-w-full tw-flex tw-grow tw-items-center tw-justify-center tw-text-2xl">There's no item!</div>
+    }
+    @else {
+    <div #mainContainer id="itemsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
+        @for(item of items; track item.id){
+        <div id="item" class="tw-flex tw-flex-col tw-cursor-pointer  " [routerLink]="['/item/item-detail']"
+            [queryParams]="{id:item.id}">
+            <div class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative">
+                @if(item.colors[0].photos[0]){
+                <img [src]="item.colors[0].photos[0]" class="s-image">
+                }
+            </div>
+            <span id="item-name" class="tw-whitespace-nowrap tw-text-ellipsis tw-overflow-hidden">{{item.name}}</span>
+            <div class="tw-flex tw-flex-row  tw-items-center tw-gap-3">
+                <ngb-rating [rate]="item?.rating || 0" [max]="5" [readonly]="true" />
+                <span class="tw-text-xs">{{item?.nbrSold}} Sold</span>
+            </div>
+            <div class="tw-flex tw-flex-row tw-w-full ">
+                <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row tw-gap-2 tw-items-center">
+                        @if(item && item.discountedPrice){
+                        <span
+                            class="ttw-text-2xl tw-font-bold tw-mt-2 tw-mb-2 text-danger">${{item.discountedPrice}}</span>
+                        <span class="tw-line-through tw-font-bold tw-text-sm">${{item.price}}</span>
+                        <span
+                            class="text-danger tw-font-bold ttw-text-lg">-%{{getDiscountPercentage(item.price,item.discountedPrice)}}</span>
+                        }
+                        @else {
+                        <span class="ttw-text-2xl tw-font-bold tw-mt-2 tw-mb-2">${{item?.price}}</span>
+                        }
+                    </div>
+                    <div class="tw-mt-[-15px]">
+                        @if(item.shippingCoast && item.shippingCoast !=0){
+                        <small>shipping : <span class="tw-font-bold">${{item.shippingCoast}}</span></small>
+                        }@else {
+                        <small>free shipping</small>
+                        }
+
+                    </div>
+                </div>
+
+                <button id="add-to-cart" class="btn btn-rounded tw-ms-auto" (click)="onAddToCartClick($event,item)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-cart-plus" viewBox="0 0 16 16">
+                        <path
+                            d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+                        <path
+                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        }
     </div>
     }
     }
-
 </div>

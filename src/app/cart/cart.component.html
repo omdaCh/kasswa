@@ -1,21 +1,21 @@
-<div class="tw-flex tw-flex-col  tw-h-full tw-p-4 tw-gap-4">
+<div id="shopping-cart" class="tw-flex tw-flex-col  tw-h-full tw-p-4 tw-gap-4">
     @if(cartService.shoppingCart.totalQuantity!==0){
     <span class="tw-text-xl tw-font-bold ">Cart({{cartService.shoppingCart.totalQuantity}})</span>
     <div class="tw-flex sm:tw-flex-row tw-flex-col ttw-w-full tw-gap-4 ">
         <div id="items" 
             class="tw-flex tw-flex-col tw-gap-1 tw-border tw-border-gray-300 tw-rounded-xl tw-p-4 tw-w-full">
             @for(cartItem of cartService.shoppingCart.cartItems; track cartItem; ){
-            <div id="cartItem" class="tw-flex tw-flex-row tw-gap-2 tw-w-ful ttw-bg-green-100">
+            <div id="cart-item" class="tw-flex tw-flex-row tw-gap-2 tw-w-ful ttw-bg-green-100">
                 <div id="colorPhoto" class="tw-bg-gray-100 tw-rounded-lg tw-w-[100px] tw-h-[100px]">
                     <img [src]="cartItem.colorPhotoUrl"
                         class="tw-w-[100px] tw-h-[100px] tw-min-w-[100px] tw-min-h-[100px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
                 </div>
-                <div id="information" class="tw-flex tw-flex-col tw-gap-2 tw-w-full tw-max-w-full">
+                <div id="item-information" class="tw-flex tw-flex-col tw-gap-2 tw-w-full tw-max-w-full">
                     <div class="tw-flex tw-flex-col ">
                         <div class="tw-flex tw-flex-row">
                             <span
                                 class="ttw-whitespace-nowrap ttw-text-ellipsis ttw-truncate ttw-overflow-hidden">{{cartItem.itemName}}</span>
-                            <button class="btn tw-ms-auto" (click)="removeCartItem(cartItem)">
+                            <button id="remove-item-button" class="btn tw-ms-auto" (click)="removeCartItem(cartItem)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
@@ -25,14 +25,13 @@
                                 </svg>
                             </button>
                         </div>
-
                         <span class="tw-font-bold tw-text-xs">{{cartItem.color}}/{{cartItem.size}}</span>
                     </div>
                     <div class="tw-flex tw-flex-w tw-w-full">
                         <span class="tw-font-bold">${{cartItem.totalPrice | number:'1.2-2'}}</span>
                         <i class="bi bi-plus-circle"></i>
                         <div class="tw-flex tw-flex-row tw-ms-auto tw-gap-2 tw-items-center">
-                            <button class="btn btn-outline-dark btn-sm btn-circle"
+                            <button id="item-increment-quantity-button" class="btn btn-outline-dark btn-sm btn-circle"
                                 (click)="incrementQuantity(cartItem)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-plus" viewBox="0 0 16 16">
@@ -40,8 +39,8 @@
                                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                 </svg>
                             </button>
-                            <span class="tw-text-sm tw-font-bold">{{cartItem.quantity}}</span>
-                            <button class="btn btn-outline-dark btn-sm btn-circle"
+                            <span id="item-quantity" class="tw-text-sm tw-font-bold">{{cartItem.quantity}}</span>
+                            <button id="item-decrement-quantity-button" class="btn btn-outline-dark btn-sm btn-circle"
                                 (click)="decrementQuantity(cartItem)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                                     class="bi bi-dash" viewBox="0 0 16 16">
@@ -85,7 +84,7 @@
                 <span class="tw-ms-auto">{{cartService.shoppingCart.totalPrice | number:'1.2-2' }}</span>
             </div>
 
-            <button class="btn btn-dark" [routerLink]="['/checkout']">Pay</button>
+            <button id="pay-button" class="btn btn-dark" [routerLink]="['/checkout']">Pay</button>
 
         </div>
     </div>
@@ -100,7 +99,7 @@
             </svg>
         </div>
         <span class="tw-text-lg tw-font-bold">There's no articles in the Shopping Cart</span>
-        <button class="btn btn-dark tw-w-[300px]" [routerLink]="['/item/item-list']">Browse the articles</button>
+        <button id="browse-articles" class="btn btn-dark tw-w-[300px]" [routerLink]="['/item/item-list']">Browse the articles</button>
     </div>
     }
 

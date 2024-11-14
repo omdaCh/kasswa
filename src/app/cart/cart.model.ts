@@ -1,17 +1,5 @@
-// import { IItem } from "../item/item.model";
-
 import { PaymentInfoModel } from "../checkout/payment-information/payment-information.model";
 import { ShippingInfoModel } from "../checkout/shipping-information/shipping-infromation.model";
-import { IItem } from "../item/item.model";
-
-// export type CartItem = { item: IItem, quantity: number }
-
-// export interface ICart {
-//     id:number;
-//     cartItems: CartItem[];
-//     totalQuantity:number;
-//     totalPrice:number;
-// }
 
 
 // Define the item model
@@ -60,8 +48,8 @@ export class ShoppingCart {
         this.totalPrice = 0;
         // this.createdAt = new Date();
         // this.updatedAt = new Date();
-        this.shippingInfo = new ShippingInfoModel('chemakhi imad', 'omda@gmail.com', '0676884563', 'Algeria', 'Guelma', 'Belkheir', 'Café mohamed salah n:10', '24015');
-        this.paymentInfo = new PaymentInfoModel('Chemakhi imad', '4567 5674 3456 2645', '12/28', '472');;
+        this.shippingInfo = new ShippingInfoModel();
+        this.paymentInfo = new PaymentInfoModel();
         // this.currency = currency;
         // this.status = 'active';
     }

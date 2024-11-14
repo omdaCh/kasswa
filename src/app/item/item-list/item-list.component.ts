@@ -27,9 +27,10 @@ export class ItemListComponent implements OnInit {
 
   private modalService: NgbModal = inject(NgbModal);
 
+  filtredListTitle: string = '';
 
   ngOnInit(): void {
-  
+
     this.route.queryParamMap.pipe(
       switchMap(params => {
         this.items = [];
@@ -38,8 +39,18 @@ export class ItemListComponent implements OnInit {
         const age = params.get('age');
         const search = params.get('search');
 
+
+
         // Determine the appropriate item fetching method
         if (gender || age) {
+          if (gender == 'male') {
+            this.filtredListTitle = 'Men clothes'
+          } else if (gender == 'female') {
+            this.filtredListTitle = 'Women clothes'
+          }
+          else {
+            this.filtredListTitle = 'Kids clothes'
+          }
           return this.itemService.getItemsOfGenderAge(gender, age);
         } else if (search) {
           return this.itemService.searchItems(search);
@@ -47,10 +58,13 @@ export class ItemListComponent implements OnInit {
           return this.itemService.getItems();
         }
       })
-    ).subscribe(items => {
-      this.items = items;
-      this.itemsAreLoading = false
-      this.scrollToTop();
+    ).subscribe({
+      next: (items) => {
+        this.items = items;
+        this.itemsAreLoading = false
+        this.scrollToTop();
+      },
+      error: (err) => { console.log(err) }
     });
   }
 
@@ -61,13 +75,10 @@ export class ItemListComponent implements OnInit {
     }
   }
 
-
   onAddToCartClick(event: Event, item: IItem): void {
     event.stopPropagation();
     const modelRef = this.modalService.open(ItemAboutAddingToCartComponent, { centered: true, windowClass: 'full-width-modal' });
     modelRef.componentInstance.itemId = item.id;
   }
-
-
 
 }

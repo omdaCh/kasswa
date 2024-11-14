@@ -1,11 +1,11 @@
-<div class="tw-flex tw-flex-col tw-gap-4 tw-p-4">
+<div id="delete-cart-item" class="tw-flex tw-flex-col tw-gap-4 tw-p-4">
     <div class="tw-flex tw-flex-row">
         <span class="tw-font-bold">Delete the Item</span>
         <button type="button" class="btn-close tw-ms-auto" aria-label="Close" (click)="activeModal.dismiss('cancel')"></button>
     </div>
     <p>Are you sure you want to delete this article?</p>
     <div class="tw-flex tw-flex-col tw-w-full  tw-gap-2">
-        <button class="btn btn-dark" (click)="activeModal.close('confirm')">Delete</button>
-        <button class="btn btn-outline-dark" (click)="activeModal.dismiss('cancel')">Cancel</button>
+        <button id="confirm-deletion-button" class="btn btn-dark" (click)="activeModal.close('confirm')">Delete</button>
+        <button id="cancel-deletion-button" class="btn btn-outline-dark" (click)="activeModal.dismiss('cancel')">Cancel</button>
     </div>
 </div>

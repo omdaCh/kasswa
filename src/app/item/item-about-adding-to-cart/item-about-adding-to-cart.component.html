@@ -1,8 +1,8 @@
-<div #mainContainer class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-pb-10 tw-overflow-x-auto tw-min-w-full tw-min-h-full">
+<div #mainContainer id="item-dialog" class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-pb-10 tw-overflow-x-auto tw-min-w-full tw-min-h-full">
     <button type="button" class="btn-close tw-ms-auto" aria-label="Close"
         (click)="activeModal.dismiss('cancel')"></button>
     @if(item){
-    <div class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-4">
+    <div id="item" class="tw-flex sm:tw-flex-row tw-flex-col tw-gap-4">
         <div id="item-photo"
             class="tw-flex tw-flex-row tw-flex-1 tw-max-h-[400px] sm:tw-max-w-[400px] tw-gap-1 tw-bg-blue-100 tw-aspect-square tw-rounded-lg">
             <div class="tw-grow" (touchstart)="posIni = $event.changedTouches[0].pageX"
@@ -31,7 +31,7 @@
             </div>
             }
             <div class="tw-flex tw-flex-col">
-                <span class="tw-font-bold tw-text-xl text-worn">{{item.name}}</span>
+                <span id="item-name" class="tw-font-bold tw-text-xl text-worn">{{item.name}}</span>
                 <div class="tw-flex tw-flex-row tw-items-center tw-gap-3">
                     <ngb-rating [rate]="item.rating || 0" [max]="5" [readonly]="true" />
                     <span class="tw-text-xs">{{item.numberOfReviews}} reviews</span>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             @if(item.colors){
-            <div id="color" class="tw-flex tw-flex-col tw-gap-1">
+            <div id="item-color" class="tw-flex tw-flex-col tw-gap-1">
                 <small>Color: <span class="tw-font-bold">{{colorSelected?.colorName}}</span></small>
                 <div class="tw-flex tw-flex-row tw-gap-2">
                     @for(colorPhotos of item.colors; track colorPhotos){
@@ -76,7 +76,7 @@
             }
 
             @if(colorSelected?.sizes){
-            <div id="size" class="tw-flex tw-flex-col tw-gap-1 ">
+            <div id="item-size" class="tw-flex tw-flex-col tw-gap-1 ">
                 <small>Size: <span class="tw-font-bold">{{sizeSelected?.name}}</span></small>
                 <div class="tw-flex tw-flex-wrap tw-gap-2 tw-overflow-auto">
                     @for(size of colorSelected?.sizes; track size){
@@ -92,7 +92,7 @@
             }
 
             <div class="tw-flex tw-flex-row tw-w-full tw-gap-3 tw-mt-auto" id="actions">
-                <button class="btn btn-dark tw-w-full" (click)="addToCart()"
+                <button id="add-to-cart" class="btn btn-dark tw-w-full" (click)="addToCart()"
                     [disabled]="!(colorSelected&&sizeSelected)">ADD TO CART</button>
                 <div class="tw-flex tw-flex-row tw-w-full tw-gap-3">
                     <button class="btn btn-outline-dark tw-w-full" [routerLink]="['item/item-detail']"

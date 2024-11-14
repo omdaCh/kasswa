@@ -25,9 +25,9 @@
           </li>
         </ul>
         <div class="input-group ">
-          <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search" aria-label="Search"
-            aria-describedby="search-icon">
-          <button class="btn btn-outline-secondary" type="button" id="search-icon" [routerLink]="['/item/item-list']"
+          <input id="search-input" type="text" class="form-control" [(ngModel)]="search" placeholder="Search" aria-label="Search"
+            aria-describedby="search-button">
+          <button class="btn btn-outline-secondary" type="button" id="search-button" [routerLink]="['/item/item-list']"
             [queryParams]="{search:search}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
               viewBox="0 0 16 16">
@@ -38,16 +38,14 @@
         </div>
 
       </div>
-      <button id="cart" type="button" class="btn btn-icon tw-order-last tw-relative tw-me-1" type="button"
-        id="shoping-cart" [routerLink]="['/cart']">
+      <button id="cart-button" class="btn btn-icon tw-order-last tw-relative tw-me-1" type="button" [routerLink]="['/cart']">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
           viewBox="0 0 16 16">
           <path
             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
         </svg>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          <small>{{cartService.shoppingCart.totalQuantity}}</small>
-          <span class="visually-hidden">unread messages</span>
+          <small id="cart-quantity">{{cartService.shoppingCart.totalQuantity}}</small>
         </span>
       </button>
       <div ngbDropdown class="d-inline-block tw-order-last tw-me-2" placement="bottom-right" display="dynamic">
@@ -69,8 +67,8 @@
       <hr class="hr tw-w-full hr-blurry" />
     </div>
   </header>
-  <main class="tw-h-full tw-overflow-auto ">
-    <router-outlet />
+  <main class="tw-h-full tw-overflow-auto">
+    <router-outlet/>
   </main>
   <!-- <footer>page footer</footer> -->
 </div>

@@ -23,7 +23,7 @@ export class ShippingInformaitonComponent implements OnInit {
 
 
     protected shippementInfoForm: FormGroup = this.fb.group({
-        contactName: ['', [Validators.required]],
+        contactName: ['', [Validators.required, Validators.maxLength(50)]],
         contactEmail: ['', [Validators.required, Validators.email]],
         contactPhoneNumber: ['', [Validators.required]],
         country: ['', [Validators.required]],
