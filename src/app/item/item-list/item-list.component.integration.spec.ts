@@ -324,7 +324,6 @@ fdescribe('Item list integraiton test', () => {
         }
     ];
 
-
     beforeEach(() => {
 
         activatedRouteMock = {
