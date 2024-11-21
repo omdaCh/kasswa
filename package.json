@@ -11,7 +11,8 @@
     "json:server": "json-server --watch database.json",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "lint":"eslint ."
   },
   "private": true,
   "dependencies": {
