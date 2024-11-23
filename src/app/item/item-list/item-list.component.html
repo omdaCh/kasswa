@@ -1,7 +1,7 @@
 <div class="tw-overflow-auto tw-flex tw-flex-col tw-h-full">
     <span id="list-title" class=" tw-pl-5 tw-pt-3 tw-pb-[-5px] tw-text-sm tw-opacity-70">{{filtredListTitle}}</span>
     @if(itemsAreLoading){
-    <div #mainContainer id="skeletonsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
+    <div #skeletonsContainer id="skeletonsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
         <div class="tw-aspect-[0.7]">
             <div class="tw-aspect-square">
                 <ngx-skeleton-loader [theme]="{ 
@@ -69,17 +69,17 @@
     </div>
 
     }@else {
-    @if(items.length==0){
+    @if(items.length===0){
     <div class="tw-w-full tw-flex tw-grow tw-items-center tw-justify-center tw-text-2xl">There's no item!</div>
     }
     @else {
-    <div #mainContainer id="itemsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
+    <div #itemsContainer id="itemsContainer" class="grid-container tw-gap-2 tw-overflow-auto tw-h-full">
         @for(item of items; track item.id){
         <div id="item" class="tw-flex tw-flex-col tw-cursor-pointer  " [routerLink]="['/item/item-detail']"
             [queryParams]="{id:item.id}">
             <div class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative">
                 @if(item.colors[0].photos[0]){
-                <img [src]="item.colors[0].photos[0]" class="s-image">
+                <img [src]="item.colors[0].photos[0]" class="s-image" alt="item color photo">
                 }
             </div>
             <span id="item-name" class="tw-whitespace-nowrap tw-text-ellipsis tw-overflow-hidden">{{item.name}}</span>
@@ -102,7 +102,7 @@
                         }
                     </div>
                     <div class="tw-mt-[-15px]">
-                        @if(item.shippingCoast && item.shippingCoast !=0){
+                        @if(item.shippingCoast && item.shippingCoast !==0){
                         <small>shipping : <span class="tw-font-bold">${{item.shippingCoast}}</span></small>
                         }@else {
                         <small>free shipping</small>

@@ -4,7 +4,7 @@ import { countriesList } from "../../tools/coutries-list";
 import { ShippingInfoModel } from "./shipping-infromation.model";
 
 @Component({
-    selector: 'shipping-information',
+    selector: 'app-shipping-information',
     templateUrl: './shipping-information.component.html'
 })
 export class ShippingInformaitonComponent implements OnInit {

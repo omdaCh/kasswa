@@ -1,6 +1,5 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { IItem, ItemColor, ItemSize } from '../item.model';
-import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbCarousel } from '@ng-bootstrap/ng-bootstrap'
 import { getDiscountPercentage } from '../../tools/tools';
 import { ItemService } from '../item.service';
@@ -8,7 +7,7 @@ import { CartService } from '../../cart/cart.service';
 
 
 @Component({
-  selector: 'item-about-adding-to-cart',
+  selector: 'app-item-about-adding-to-cart',
   templateUrl: './item-about-adding-to-cart.component.html'
 })
 export class ItemAboutAddingToCartComponent implements OnInit {
@@ -34,7 +33,7 @@ export class ItemAboutAddingToCartComponent implements OnInit {
 
   activeModal = inject(NgbActiveModal);
 
-  @Input() itemId: any;
+  @Input() itemId!: string;
 
   ngOnInit(): void {
     if (this.itemId !== null) {
@@ -59,8 +58,10 @@ export class ItemAboutAddingToCartComponent implements OnInit {
     this.selectedPhotoUrl = this.colorSelected.photos[0];
   }
 
-  @ViewChild('carousel') carousel!: NgbCarousel
-  posIni: any;
+  @ViewChild('carousel') carousel!: NgbCarousel;
+
+  posIni!: number;
+  
   move(pos: number) {
     const offset = this.posIni - pos;
     if (offset < -100) this.carousel.prev()

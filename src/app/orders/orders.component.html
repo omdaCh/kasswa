@@ -36,7 +36,7 @@
                     <div id="orderItem" class="tw-flex tw-flex-row tw-gap-2 tw-w-ful">
                         <div id="colorPhoto" class="tw-bg-gray-100 tw-rounded-lg tw-w-[100px] tw-h-[100px]">
                             <img [src]="orderItem.colorPhotoUrl"
-                                class="tw-w-[100px] tw-h-[100px] tw-min-w-[100px] tw-min-h-[100px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
+                                class="tw-w-[100px] tw-h-[100px] tw-min-w-[100px] tw-min-h-[100px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply" alt="item photo">
                         </div>
                         <div id="information" class="tw-flex tw-flex-col tw-gap-2 tw-w-full tw-max-w-full">
                             <div class="tw-flex tw-flex-col ">
@@ -60,7 +60,7 @@
                             <div id="item-shipping-coast">
                                 <small>Shipping:</small>
                                 <span class="tw-font-bold">
-                                    @if(orderItem.totalShipping!=0){
+                                    @if(orderItem.totalShipping!==0){
                                     ${{orderItem.totalShipping | number:'1.2-2'}}
                                     }
                                     @else{

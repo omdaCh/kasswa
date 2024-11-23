@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from "@angular/core";
+import { Component, ViewChild, inject } from "@angular/core";
 import {
     trigger,
     state,
@@ -31,7 +31,7 @@ import { CheckoutService } from "./checkout.service";
         ])
     ]
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent {
 
     cartService: CartService = inject(CartService);
     checkoutService: CheckoutService = inject(CheckoutService);
@@ -93,13 +93,12 @@ export class CheckoutComponent implements OnInit {
     //     this.checkOutConfirmed = true;
     // }
 
-    ngOnInit(): void {
-    }
+   
 
     onCheckOutConfirmationClick(): void {
 
         this.checkoutService.confirmCheckout().subscribe({
-            next: resp => {
+            next: () => {
                 this.checkOutConfirmed = true;
                 this.cartService.emptyTheCart();
             },

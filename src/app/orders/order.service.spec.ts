@@ -8,8 +8,6 @@ describe('Order service', () => {
     let orderService: OrderService;
     let httpMock: HttpTestingController;
 
-
-
     const mockOrders: IOrder[] = [
         {
             id: 1,
@@ -151,7 +149,6 @@ describe('Order service', () => {
             totalPrice: 92
         }
     ];
-
 
     beforeEach(() => {
         TestBed.configureTestingModule({

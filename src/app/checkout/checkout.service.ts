@@ -1,7 +1,6 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { IOrder, Order, OrderItem } from "../orders/order.model";
-import { CartItem, ShoppingCart } from "../cart/cart.model";
+import { CartItem } from "../cart/cart.model";
 import { CartService } from "../cart/cart.service";
 import { Observable } from "rxjs";
 import { OrderService } from "../orders/order.service";
@@ -14,7 +13,7 @@ export class CheckoutService {
     private orderService:OrderService = inject(OrderService)
 
     public confirmCheckout(): Observable<Order> {
-        let newOrder = this.createOrderFromShoopingCart();
+        const newOrder = this.createOrderFromShoopingCart();
         this.cartService.shoppingCart.cartItems.forEach(cartItem => {
             newOrder.orderItems.push(this.creatOrderItemFromCartItem(cartItem));
         });
@@ -24,7 +23,7 @@ export class CheckoutService {
    
 
     private createOrderFromShoopingCart(): Order {
-        let newOrder: Partial<IOrder> = {};
+        const newOrder: Partial<IOrder> = {};
         newOrder.date = new Date();
         newOrder.status = "pending";
         newOrder.orderItems = [];
@@ -36,7 +35,7 @@ export class CheckoutService {
     }
 
     private creatOrderItemFromCartItem(cartItem: CartItem): OrderItem {
-        let orderItem: Partial<OrderItem> = {}
+        const orderItem: Partial<OrderItem> = {}
         orderItem.itemId = cartItem.itemId;
         orderItem.itemName = cartItem.itemName;
         orderItem.color = cartItem.color;

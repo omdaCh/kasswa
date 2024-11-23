@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbAlertModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule } from "@angular/common/http";
-import { RouterModule, RouterOutlet, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ShippingInformaitonComponent } from "./shipping-information/shipping-infromation.component";
 import { PaymentInformationComponent } from "./payment-information/payment-information.component";
 import { CheckoutConfirmationComponent } from "./confirmation/checkout-confirmation.component";

@@ -14,6 +14,7 @@ describe('ItemListComponent', () => {
     let itemListComponent: ItemListComponent;
     let fixture: ComponentFixture<ItemListComponent>;
     let itemServiceMock: jasmine.SpyObj<ItemService>;
+    /* eslint-disable */
     let activatedRouteMock: any;
     let modalServiceMock: jasmine.SpyObj<NgbModal>;
 
@@ -140,11 +141,5 @@ describe('ItemListComponent', () => {
 
         expect(event.stopPropagation).toHaveBeenCalled();
     });
-
-    it('should scroll to top after loading items', () => { 
-        fixture.detectChanges(); 
-        expect(itemListComponent.mainContainer.nativeElement.scrollTop).toBe(0);
-    });
-
 
 });

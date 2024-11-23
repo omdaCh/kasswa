@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CartService } from './cart.service';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,9 +19,9 @@ export class CartComponent {
   private modalService: NgbModal = inject(NgbModal);
 
   removeCartItem(cartItemToRemove: CartItem): void {
-    const modalRef = this.modalService.open(RemoveCartItemComponent, { centered: true, }).result.then(
+    this.modalService.open(RemoveCartItemComponent, { centered: true, }).result.then(
       (result) => {
-        if (result = 'confirm') {
+        if (result == 'confirm') {
           this.cartService.removeCartItem(cartItemToRemove);
         }
       }

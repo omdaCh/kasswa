@@ -42,7 +42,7 @@ describe('Checkout confirmation', () => {
     });
 
     it('should validate email format', () => {
-        cy.get('#contactEmail').type('invalid-email');;
+        cy.get('#contactEmail').type('invalid-email');
         cy.get('#contactEmailField').get('#invalidEmailError').should('exist');
 
         cy.get('#contactEmail').clear().type('test@example.com');

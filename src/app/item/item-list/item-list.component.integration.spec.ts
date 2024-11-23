@@ -4,19 +4,23 @@ import { ItemService } from "../item.service";
 import { ComponentFixture } from "@angular/core/testing";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { NgbModal, NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
-import { ActivatedRoute, convertToParamMap, RouterModule } from "@angular/router";
+import { ActivatedRoute, convertToParamMap, ParamMap, RouterModule } from "@angular/router";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { IItem } from "../item.model";
 import { SERVER_URL } from "../../app.constants";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 
-fdescribe('Item list integraiton test', () => {
+describe('Item list integraiton test', () => {
+    
 
     let itemListComponent: ItemListComponent;
     let fixture: ComponentFixture<ItemListComponent>;
-    let itemService: ItemService;
     let httpMock: HttpTestingController;
-    let activatedRouteMock: any;
+
+    interface ActivatedRouteMock {
+        queryParamMap: Observable<ParamMap>;
+    }
+    let activatedRouteMock: ActivatedRouteMock;
     let modalServiceMock: jasmine.SpyObj<NgbModal>;
 
     const mockItems: IItem[] = [
@@ -343,8 +347,6 @@ fdescribe('Item list integraiton test', () => {
         fixture = TestBed.createComponent(ItemListComponent);
         itemListComponent = fixture.debugElement.componentInstance;
         httpMock = TestBed.inject(HttpTestingController);
-
-        itemService = TestBed.inject(ItemService);
     });
 
     afterEach(() => {

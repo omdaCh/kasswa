@@ -8,7 +8,7 @@
                         <input formControlName="contactName" class="form-control" id="contactName"
                             [class.is-invalid]="shippementInfoForm.get('contactName')!.invalid && (shippementInfoForm.get('contactName')!.dirty || shippementInfoForm.get('contactName')!.touched)"
                             placeholder="Ex: Jak Robert" required>
-                        <label>Contact name<small> *</small></label>
+                        <label for="contactName">Contact name<small> *</small></label>
                     </div>
                     @if (shippementInfoForm.get('contactName')!.invalid && (shippementInfoForm.get('contactName')!.dirty ||
                     shippementInfoForm.get('contactName')!.touched)) {

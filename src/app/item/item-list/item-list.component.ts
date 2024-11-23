@@ -8,7 +8,7 @@ import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/ite
 import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'item-list-component',
+  selector: 'app-item-list-component',
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.scss'
 })
@@ -62,17 +62,9 @@ export class ItemListComponent implements OnInit {
       next: (items) => {
         this.items = items;
         this.itemsAreLoading = false
-        this.scrollToTop();
       },
       error: (err) => { console.log(err) }
     });
-  }
-
-  // Scroll to the top of the container
-  private scrollToTop(): void {
-    if (this.mainContainer) {
-      this.mainContainer.nativeElement.scrollTop = 0;
-    }
   }
 
   onAddToCartClick(event: Event, item: IItem): void {

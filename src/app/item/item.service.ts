@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { Observable } from "rxjs";
 import { IItem } from "./item.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { SERVER_URL } from "../app.constants";

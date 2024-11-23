@@ -1,4 +1,5 @@
-<div #mainContainer id="item-dialog" class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-pb-10 tw-overflow-x-auto tw-min-w-full tw-min-h-full">
+<div #mainContainer id="item-dialog"
+    class="tw-flex tw-flex-col tw-gap-4 tw-p-2 tw-pb-10 tw-overflow-x-auto tw-min-w-full tw-min-h-full">
     <button type="button" class="btn-close tw-ms-auto" aria-label="Close"
         (click)="activeModal.dismiss('cancel')"></button>
     @if(item){
@@ -11,7 +12,8 @@
                     @for(sidePhoto of colorSelected?.photos; track sidePhoto){
                     <ng-template ngbSlide>
                         <div class="tw-flex tw-min-h-[400px] tw-max-h-[400px] tw-items-center tw-justify-center">
-                            <img [src]="sidePhoto" class="tw-max-h-[400px] tw-mix-blend-multiply tw-object-contain" />
+                            <img [src]="sidePhoto" class="tw-max-h-[400px] tw-mix-blend-multiply tw-object-contain"
+                                alt="side photo" />
                         </div>
                     </ng-template>
                     }
@@ -24,7 +26,7 @@
             <div id="item-brand" class="tw-flex tw-flew-row tw-gap-2 tw-items-center ">
                 @if(item.brand.photoUrl){
                 <div class=" tw-p-1 tw-bg-gray-100 tw-rounded-lg">
-                    <img [src]="item.brand.photoUrl" class="tw-w-[30px] tw-mix-blend-multiply">
+                    <img [src]="item.brand.photoUrl" class="tw-w-[30px] tw-mix-blend-multiply" alt="item brand">
                 </div>
                 }
                 <span class="tw-text-xs">{{item.brand.name}}</span>
@@ -50,7 +52,7 @@
                 <div id="item-shipping-coast" class="tw-mt-[-10px]">
                     <small>Shipping:</small>
                     <span class="tw-font-bold">
-                        @if(item.shippingCoast !== null && item.shippingCoast!=0){
+                        @if(item.shippingCoast !== null && item.shippingCoast!==0){
                         ${{item.shippingCoast}}
                         }
                         @else{
@@ -66,9 +68,10 @@
                     @for(colorPhotos of item.colors; track colorPhotos){
                     <div id="colorPhoto"
                         class="tw-bg-gray-100 tw-rounded-lg tw-w-[64px] tw-h-[64px] hover:tw-border-2 tw-border-gray-600"
-                        (click)="selectedColor(colorPhotos)">
+                        (click)="selectedColor(colorPhotos)" (keyup.enter)="selectedColor(colorPhotos)" tabindex="0">
                         <img [src]="colorPhotos.photos[0]"
-                            class="tw-w-[60px] tw-h-[60px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
+                            class="tw-w-[60px] tw-h-[60px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply "
+                            alt="item color photo">
                     </div>
                     }
                 </div>
@@ -83,7 +86,7 @@
                     <div class="tw-flex tw-rounded-xl tw-w-[70px] tw-min-w-[70px] tw-h-[30px] tw-justify-center tw-cursor-pointer"
                         [ngClass]="[sizeSelected === size ? 'tw-border-2 tw-border-gray-500' : 'tw-border-[1px] tw-border-gray-300 hover:tw-border-gray-500',
                                      size.available.toString()==='true' ? 'tw-opacity-100' : 'tw-pointer-events-none tw-opacity-50']"
-                        (click)="sizeSelected=size">
+                        (click)="sizeSelected=size" (keyup.enter)="sizeSelected=size" tabindex="0">
                         <span>{{size.name}}</span>
                     </div>
                     }

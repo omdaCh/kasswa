@@ -12,7 +12,7 @@ describe('AppComponent', () => {
           provide: ActivatedRoute,
           useValue: {
             queryParamMap: of({
-              get: (key: string) => 'test-search'
+              get: () => 'test-search'
             })
           }
         }

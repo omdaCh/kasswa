@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { IItem, ItemColor, ItemSize } from '../item.model';
 import { ActivatedRoute } from '@angular/router';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap'
@@ -6,14 +6,14 @@ import { getDiscountPercentage } from '../../tools/tools';
 import { ItemService } from '../item.service';
 import { CartService } from '../../cart/cart.service';
 import { ItemAboutAddingToCartComponent } from '../item-about-adding-to-cart/item-about-adding-to-cart.component';
-import { catchError, filter, finalize, map, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, filter, map, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 
 @Component({
   selector: 'app-second-component',
   templateUrl: './item-detail.component.html'
 })
-export class ItemDetailComponent implements OnInit {
+export class ItemDetailComponent implements OnInit, OnDestroy {
 
 
   @Input() item: IItem | undefined;
@@ -85,7 +85,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   @ViewChild('carousel') carousel!: NgbCarousel
-  posIni: any;
+  posIni!: number;
   move(pos: number) {
     const offset = this.posIni - pos;
     if (offset < -100) this.carousel.prev()
@@ -93,15 +93,13 @@ export class ItemDetailComponent implements OnInit {
     if (offset > 100) this.carousel.next();
   }
 
-
-
   addToCart(): void {
     if (this.item && this.colorSelected && this.sizeSelected) {
       this.cartService.addItem(this.item, this.colorSelected.colorName, this.sizeSelected.name, 1)
     }
   }
 
-  onSimilarItemAddToCartClick( item: IItem): void {
+  onSimilarItemAddToCartClick(item: IItem): void {
     const modelRef = this.modalService.open(ItemAboutAddingToCartComponent, { centered: true, windowClass: 'full-width-modal' });
     modelRef.componentInstance.itemId = item.id;
   }

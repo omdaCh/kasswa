@@ -19,12 +19,12 @@ export class CartService {
             this.setCartItemQuantity(existingItem,existingItem.quantity +1);
         } else {
             //create new cart item
-            let photoUrl = item.colors.find(itemColor => itemColor.colorName == selectedColor)?.photos[0];
-            let price = item.discountedPrice ? item.discountedPrice : item.price;
-            let totalPrice: number = price * quantity;
-            let shippingCoast: number = item.shippingCoast ? item.shippingCoast : 0;
-            let totalShipping: number = shippingCoast * quantity;
-            let newCartItem: CartItem = new CartItem(item.id, item.name, quantity, price, totalPrice,shippingCoast, totalShipping, selectedColor, selectedSize, photoUrl);
+            const photoUrl = item.colors.find(itemColor => itemColor.colorName == selectedColor)?.photos[0];
+            const price = item.discountedPrice ? item.discountedPrice : item.price;
+            const totalPrice: number = price * quantity;
+            const shippingCoast: number = item.shippingCoast ? item.shippingCoast : 0;
+            const totalShipping: number = shippingCoast * quantity;
+            const newCartItem: CartItem = new CartItem(item.id, item.name, quantity, price, totalPrice,shippingCoast, totalShipping, selectedColor, selectedSize, photoUrl);
             this.shoppingCart.cartItems.push(newCartItem);
         }
 

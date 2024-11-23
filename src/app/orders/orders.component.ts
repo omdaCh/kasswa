@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 import { FormBuilder, FormsModule, ReactiveFormsModule, UntypedFormGroup } from "@angular/forms";
 
 @Component({
-    selector: 'my-purcheses',
+    selector: 'app-my-purcheses',
     templateUrl: './orders.component.html',
     standalone: true,
     imports: [CommonModule, FormsModule, ReactiveFormsModule]

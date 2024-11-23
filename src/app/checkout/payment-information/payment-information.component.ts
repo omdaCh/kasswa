@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PaymentInfoModel } from "./payment-information.model";
 
 
 @Component({
-    selector: "payment-information",
+    selector: "app-payment-information",
     templateUrl: "./payment-information.component.html"
 })
 export class PaymentInformationComponent implements OnInit {

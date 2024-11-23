@@ -39,7 +39,7 @@
                     @for(sidePhoto of colorSelected?.photos; track sidePhoto){
                     <ng-template ngbSlide>
                         <div class="tw-flex tw-min-h-[400px] tw-max-h-[400px] tw-items-center tw-justify-center">
-                            <img [src]="sidePhoto" class="tw-max-h-[400px] tw-mix-blend-multiply tw-object-contain" />
+                            <img [src]="sidePhoto" class="tw-max-h-[400px] tw-mix-blend-multiply tw-object-contain" alt="item side photo"/>
                         </div>
                     </ng-template>
                     }
@@ -52,7 +52,7 @@
             <div id="item-brand" class="tw-flex tw-flew-row tw-gap-2 tw-items-center ">
                 @if(item.brand.photoUrl){
                 <div class=" tw-p-1 tw-bg-gray-100 tw-rounded-lg">
-                    <img [src]="item.brand.photoUrl" class="tw-w-[30px] tw-mix-blend-multiply">
+                    <img [src]="item.brand.photoUrl" class="tw-w-[30px] tw-mix-blend-multiply" alt="item brand photo">
                 </div>
                 }
                 <span class="tw-text-xs">{{item.brand.name}}</span>
@@ -78,7 +78,7 @@
                 <div id="item-shipping-coast" class="tw-mt-[-10px]">
                     <small>Shipping:</small>
                     <span class="tw-font-bold">
-                        @if(item.shippingCoast !== null && item.shippingCoast!=0){
+                        @if(item.shippingCoast !== null && item.shippingCoast!==0){
                         ${{item.shippingCoast}}
                         }
                         @else{
@@ -94,9 +94,9 @@
                     @for(colorPhotos of item.colors; track colorPhotos){
                     <div id="colorPhoto"
                         class="tw-bg-gray-100 tw-rounded-lg tw-w-[64px] tw-h-[64px] hover:tw-border-2 tw-border-gray-600"
-                        (click)="selectedColor(colorPhotos)">
+                        (click)="selectedColor(colorPhotos)" (keyup.enter)="selectedColor(colorPhotos)" tabindex="0">
                         <img [src]="colorPhotos.photos[0]"
-                            class="tw-w-[60px] tw-h-[60px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
+                            class="tw-w-[60px] tw-h-[60px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply" alt="item color photo">
                     </div>
                     }
                 </div>
@@ -111,7 +111,7 @@
                     <div class="tw-flex tw-rounded-xl tw-w-[70px] tw-min-w-[70px] tw-h-[30px] tw-justify-center tw-cursor-pointer"
                         [ngClass]="[sizeSelected === size ? 'tw-border-2 tw-border-gray-500' : 'tw-border-[1px] tw-border-gray-300 hover:tw-border-gray-500',
                                              size.available.toString()==='true' ? 'tw-opacity-100' : 'tw-pointer-events-none tw-opacity-50']"
-                        (click)="sizeSelected=size">
+                        (click)="sizeSelected=size" (keyup.enter)="sizeSelected=size" tabindex="0">
                         <span>{{size.name}}</span>
                     </div>
                     }
@@ -120,7 +120,7 @@
             }
 
             <div class="tw-flex tw-flex-row tw-w-full tw-gap-3 tw-mt-auto" id="actions">
-                <button class="btn btn-dark tw-w-full" (click)="addToCart()"
+                <button class="btn btn-dark tw-w-full" (click)="addToCart()" 
                     [disabled]="!(colorSelected&&sizeSelected)">ADD TO CART</button>
                 <button class="btn btn-outline-dark">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -160,7 +160,7 @@
         <hr class="hr tw-w-full hr-blurry" />
     </div>
 
-    @if(similairItems.length!=0){
+    @if(similairItems.length!==0){
     <div class="tw-flex tw-flex-col">
         <span>Similar items</span>
         <div class="tw-flex tw-flex-row tw-gap-4 tw-overflow-y-auto" id="similarItems">
@@ -170,7 +170,7 @@
                 <div
                     class="tw-flex tw-items-center tw-bg-gray-100 tw-aspect-square tw-rounded-xl tw-relative tw-min-w-[150px]">
                     @if(similarItem.colors[0].photos[0]){
-                    <img [src]="similarItem.colors[0].photos[0]" class="s-image">
+                    <img [src]="similarItem.colors[0].photos[0]" class="s-image" alt="similar item photo">
                     }
                 </div>
                 <span class="tw-whitespace-nowrap tw-text-ellipsis tw-overflow-hidden">{{similarItem.name}}</span>

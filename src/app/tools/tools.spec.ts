@@ -39,9 +39,10 @@ describe('getDiscountPercentage', () => {
   });
 
   it('should return 0 when price or discountedPrice is undefined or null', () => {
+    /* eslint-disable */
     const undefinedPrice = getDiscountPercentage(undefined as any, 80);
     expect(undefinedPrice).toBe(0);  // Undefined price, return 0
-
+    /* eslint-disable */
     const nullDiscountedPrice = getDiscountPercentage(100, null as any);
     expect(nullDiscountedPrice).toBe(0);  // Null discountedPrice, return 0
   });

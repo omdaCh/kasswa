@@ -7,7 +7,7 @@
             @for(cartItem of cartService.shoppingCart.cartItems; track cartItem; ){
             <div id="cart-item" class="tw-flex tw-flex-row tw-gap-2 tw-w-ful ttw-bg-green-100">
                 <div id="colorPhoto" class="tw-bg-gray-100 tw-rounded-lg tw-w-[100px] tw-h-[100px]">
-                    <img [src]="cartItem.colorPhotoUrl"
+                    <img [src]="cartItem.colorPhotoUrl" alt="item color photo "
                         class="tw-w-[100px] tw-h-[100px] tw-min-w-[100px] tw-min-h-[100px] tw-object-contain tw-rounded-lg tw-mix-blend-multiply ">
                 </div>
                 <div id="item-information" class="tw-flex tw-flex-col tw-gap-2 tw-w-full tw-max-w-full">
@@ -52,7 +52,7 @@
                     <div id="item-shipping-coast">
                         <small>Shipping:</small>
                         <span class="tw-font-bold">
-                            @if(cartItem.totalShipping!=0){
+                            @if(cartItem.totalShipping!==0){
                             ${{cartItem.totalShipping | number:'1.2-2'}}
                             }
                             @else{

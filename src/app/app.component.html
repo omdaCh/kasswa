@@ -6,8 +6,8 @@
         aria-label="Toggle navigation" (click)="toggleNavbar()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="nnavbar-brand tw-ms-2 tw-me-auto" [routerLink]="['/item/item-list']">
-        <img src="../assets/kasswa text beside.svg" class="tw-w-[100px] tw-min-w-[100px]">
+      <a class="nnavbar-brand tw-ms-2 tw-me-auto" [routerLink]="['/item/item-list']" aria-label="logo">
+        <img src="../assets/kasswa text beside.svg" class="tw-w-[100px] tw-min-w-[100px]" alt="Kasswa logo">
       </a>
       <div class="collapse navbar-collapse tw-ms-10 tw-me-2" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed()">
         <ul class="navbar-nav ms-auto">

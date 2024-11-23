@@ -15,7 +15,7 @@ describe('Item detail component', () => {
 
     let itemDetailComponent: ItemDetailComponent;
     let fixture: ComponentFixture<ItemDetailComponent>;
-    let activatedRouteMock: any;
+    let activatedRouteMock: Partial<ActivatedRoute>;
     let itemServiceMock: jasmine.SpyObj<ItemService>;
     let cartServiceMock: jasmine.SpyObj<CartService>;
     let modalServiceMock: jasmine.SpyObj<NgbModal>;
@@ -240,8 +240,8 @@ describe('Item detail component', () => {
 
     it('should call cartService.addItem when all inputs are set, otherwise not call', () => {
 
-        let colorSelectedMock = itemMock.colors[0];
-        let sizeSelectedMock = itemMock.colors[0].sizes[0];
+        const colorSelectedMock = itemMock.colors[0];
+        const sizeSelectedMock = itemMock.colors[0].sizes[0];
 
         const testCases = [
             {
@@ -298,9 +298,10 @@ describe('Item detail component', () => {
 
     it('Should open dialog when one of similar item is added to cart', () => {
         const modalRefMock = {
-            componentInstance: { itemId: '' }, // Initial empty object
+            componentInstance: { itemId: '' }, 
         };
 
+        /* eslint-disable */
         modalServiceMock.open.and.returnValue(modalRefMock as any);
 
         itemDetailComponent.onSimilarItemAddToCartClick(itemMock);

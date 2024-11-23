@@ -5,7 +5,7 @@ import { PaymentInfoModel } from "../payment-information/payment-information.mod
 
 
 @Component({
-    selector: 'checkout-confirmation',
+    selector: 'app-checkout-confirmation',
     templateUrl: './checkout-confirmation.component.html'
 })
 export class CheckoutConfirmationComponent {

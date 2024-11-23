@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core";
+import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, Router } from "@angular/router";
 import { IItem } from "../item.model";
 import { Observable } from "rxjs/internal/Observable";

@@ -1,5 +1,5 @@
 <div id="container" class="tw-flex tw-flex-col tw-w-full tw-h-full tw-p-4 tw-overflow-x-auto">
-    @if(!(cartService.shoppingCart.cartItems.length ==0 && checkOutConfirmed==false)){
+    @if(!(cartService.shoppingCart.cartItems.length ===0 && checkOutConfirmed===false)){
     @if(!checkOutConfirmed){
     <div id="stepper" class="tw-flex tw-flex-row tw-w-full tw-relative tw-items-center tw-justify-between">
         <div class=" tw-z-10 tw-w-full sm:tw-w-auto">
@@ -7,31 +7,31 @@
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-gap-2 ttw-bg-gray-50 tw-rounded-lg tw-p-2"
                     [class.text-danger]="shipInfoNextClicked && !shipInfoComp.isFormValid()">
                     <span class="badge text-bg-primary rounded-pill  tw-w-[20px] tw-h-[20px]"
-                        [ngClass]="shipInfoNextClicked && !shipInfoComp.isFormValid()?'text-bg-danger':currentStep==1?'text-bg-primary':'text-bg-dark'"
-                        [class.tw-opacity-50]="currentStep!=1">1</span>
+                        [ngClass]="shipInfoNextClicked && !shipInfoComp.isFormValid()?'text-bg-danger':currentStep===1?'text-bg-primary':'text-bg-dark'"
+                        [class.tw-opacity-50]="currentStep!==1">1</span>
                     <span>Shipping address</span>
                 </div>
             </button>
         </div>
         <div class=" tw-z-10 tw-w-full sm:tw-w-auto">
-            <button class="btn btn-light tw-w-full sm:tw-w-auto btn-sm" [disabled]="currentStep==1"
+            <button class="btn btn-light tw-w-full sm:tw-w-auto btn-sm" [disabled]="currentStep===1"
                 [class.text-danger]="paymentInfoNextClicked && !paymentInfoComp.isFormValid()" (click)="selectStep(2)">
                 <div
                     class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-gap-2 ttw-bg-gray-50 tw-rounded-lg tw-p-2">
                     <span class="badge text-bg-primary rounded-pill  tw-w-[20px] tw-h-[20px]"
-                        [ngClass]="paymentInfoNextClicked && !paymentInfoComp.isFormValid()?'text-bg-danger':currentStep==2?'text-bg-primary':'text-bg-dark'"
-                        [class.tw-opacity-50]="currentStep!=2">2</span>
+                        [ngClass]="paymentInfoNextClicked && !paymentInfoComp.isFormValid()?'text-bg-danger':currentStep===2?'text-bg-primary':'text-bg-dark'"
+                        [class.tw-opacity-50]="currentStep!==2">2</span>
                     <span>Payment information</span>
                 </div>
             </button>
         </div>
         <div class=" tw-z-10 tw-w-full sm:tw-w-auto">
-            <button class="btn btn-light tw-w-full sm:tw-w-auto btn-sm" [disabled]="currentStep!=3"
+            <button class="btn btn-light tw-w-full sm:tw-w-auto btn-sm" [disabled]="currentStep!==3"
                 (click)="selectStep(3)">
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-gap-2  tw-rounded-lg tw-p-2">
                     <span class="badge text-bg-primary rounded-pill  tw-w-[20px] tw-h-[20px]"
-                        [ngClass]="currentStep==3?'text-bg-primary':'text-bg-dark'"
-                        [class.tw-opacity-50]="currentStep!=3">3</span>
+                        [ngClass]="currentStep===3?'text-bg-primary':'text-bg-dark'"
+                        [class.tw-opacity-50]="currentStep!==3">3</span>
                     <span>Confirmation</span>
                 </div>
             </button>
@@ -39,15 +39,15 @@
         <hr class="tw-absolute tw-w-full tw-z-0">
     </div>
     <div id="stepper-container" class="tw-relative tw-overflow-x-hidden tw-w-full tw-h-full">
-        <shipping-information #shipInfoComp [shippingInfoModel]="shippingInfoModel"
+        <app-shipping-information #shipInfoComp [shippingInfoModel]="shippingInfoModel"
             [@slideIn]="currentStep === 1 ? 'visible' : 'hidden'" (nextClicked)="addressNextClicked()"
-            [hidden]="currentStep!==1"></shipping-information>
-        <payment-information #paymentInfoComp [paymentInfoModel]="paymentInfoModel"
+            [hidden]="currentStep!==1"></app-shipping-information>
+        <app-payment-information #paymentInfoComp [paymentInfoModel]="paymentInfoModel"
             [@slideIn]="currentStep === 2 ? 'visible' : 'hidden'" (nextClicked)="paymentNextClicked()"
-            [hidden]="currentStep!==2"></payment-information>
-        <checkout-confirmation #checkoutConfComp [shippingInfoModel]="shippingInfoModel"
+            [hidden]="currentStep!==2"></app-payment-information>
+        <app-checkout-confirmation #checkoutConfComp [shippingInfoModel]="shippingInfoModel"
             [paymentInfoModel]="paymentInfoModel" (confirmationClick)="onCheckOutConfirmationClick()"
-            [@slideIn]="currentStep===3? 'visible':'hidden'" [hidden]="currentStep!==3"></checkout-confirmation>
+            [@slideIn]="currentStep===3? 'visible':'hidden'" [hidden]="currentStep!==3"></app-checkout-confirmation>
     </div>
 
     @if(formErrorsAlertOpen){
