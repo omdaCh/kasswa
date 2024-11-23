@@ -1,33 +1,26 @@
-module.exports = function (config) {
+module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine', '@angular-devkit/build-angular'],
-        browsers: ['ChromeHeadless'], // You can add more browsers if needed
-        plugins: [
-            require('karma-chrome-launcher'),
-            require('karma-jasmine'),
-            require('karma-coverage'),
-            require('@angular-devkit/build-angular/plugins/karma')
-        ],
-        client: {
-            clearContext: false // Leave Jasmine Spec Runner output visible in browser
-        },
-        coverageReporter: {
-            dir: require('path').join(__dirname, './coverage'),
-            subdir: '.',
-            reporters: [
-                { type: 'html' },
-                { type: 'text-summary' }
-            ]
-        },
-        angularCli: {
-            environment: 'dev'
-        },
-        reporters: ['progress', 'coverage'],
-        port: 9876,
-        colors: true,
-        logLevel: config.LOG_INFO,
-        autoWatch: true,
-        singleRun: false,
-        restartOnFileChange: true
+      // ... other configurations ...
+      
+      browsers: ['ChromeHeadless'],
+      
+      customLaunchers: {
+        ChromeHeadless: {
+          base: 'Chrome',
+          flags: [
+            '--no-sandbox',
+            '--headless',
+            '--disable-gpu',
+            '--remote-debugging-port=9222',
+            '--disable-dev-shm-usage'
+          ]
+        }
+      },
+  
+      plugins: [
+        require('karma-jasmine'),
+        require('karma-chrome-launcher'),
+        // ... other plugins ...
+      ]
     });
-};
+  };
