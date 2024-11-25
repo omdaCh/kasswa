@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless --code-coverage"
   },
   "private": true,
   "dependencies": {
