@@ -84,3 +84,14 @@ deploy-staging:
     - echo "Deploying to $CI_ENVIRONMENT_NAME"
     - echo "Making actions to deploy to staging"
     - echo "Deployed to $CI_ENVIRONMENT_NAME"
+
+deploy-production:
+  extends: .deploy
+  rules:
+    - when: manual
+  variables:
+    NODE_ENV: production
+  script:
+    # Deploy to Firebase
+    - npm install -g firebase-tools
+    - firebase deploy --only hosting --token $FIREBASE_TOKEN
