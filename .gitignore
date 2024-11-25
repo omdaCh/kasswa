@@ -43,7 +43,7 @@ Thumbs.db
 
 # firebase
 .firebase/
-firebase.json
+# firebase.json
 .firebaserc
 
 .nx/cache
