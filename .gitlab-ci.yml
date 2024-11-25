@@ -44,7 +44,7 @@ assemble:
   stage: assemble
   needs: ["test", "lint"]
   script:
-    - npm run build --configuration productionv
+    - npm run build --configuration production
   artifacts:
     paths:
       - $CI_PROJECT_DIR/dist
