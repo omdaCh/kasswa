@@ -63,8 +63,10 @@ e2e:
   needs: ["assemble"]
   script:
     # Start the Angular app
-    - npm run serve & # Run the app in the background
-    - npx wait-on http://localhost:4200 # Wait for the app to be ready
+    - npm run serve & # Run Angular app in the background
+    - npx wait-on http://localhost:4200 # Wait for the app to be accessible
+    # Debugging
+    - echo "Starting Cypress tests with baseUrl=http://localhost:4200"
     # Run Cypress tests
     - npx cypress run --config baseUrl=http://localhost:4200
   artifacts:
@@ -73,8 +75,6 @@ e2e:
       - cypress/videos/** # Save videos of test runs
       - cypress/screenshots/** # Save screenshots of failures
     expire_in: 1 week
-
-
 
 .deploy:
   stage: deploy
