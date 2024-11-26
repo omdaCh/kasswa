@@ -6,6 +6,7 @@ stages:
   - dependencies
   - quality
   - assemble
+  - e2e
   - deploy
 
 install:
@@ -55,6 +56,24 @@ assemble:
     paths:
       - node_modules
     policy: pull
+
+e2e:
+  stage: e2e
+  image: cypress/included:12.8.1 # Use the official Cypress image
+  needs: ["assemble"]
+  script:
+    # Start the Angular app
+    - npm run serve & # Run your app in the background
+    - npx wait-on http://localhost:4200 # Wait for the app to be ready
+    # Run Cypress tests
+    - npx cypress run
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/** # Save videos of test runs
+      - cypress/screenshots/** # Save screenshots of failures
+    expire_in: 1 week
+
 
 .deploy:
   stage: deploy
