@@ -59,20 +59,21 @@ assemble:
 
 e2e:
   stage: e2e
-  image: cypress/included:12.8.1 # Use the official Cypress image
+  image: cypress/included:12.8.1 # Cypress official Docker image
   needs: ["assemble"]
   script:
     # Start the Angular app
-    - npm run serve & # Run your app in the background
+    - npm run serve & # Run the app in the background
     - npx wait-on http://localhost:4200 # Wait for the app to be ready
     # Run Cypress tests
-    - npx cypress run
+    - npx cypress run --config baseUrl=http://localhost:4200
   artifacts:
     when: always
     paths:
       - cypress/videos/** # Save videos of test runs
       - cypress/screenshots/** # Save screenshots of failures
     expire_in: 1 week
+
 
 
 .deploy:
