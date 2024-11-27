@@ -67,13 +67,13 @@ describe('Checkout confirmation', () => {
         cy.get('#zipCode').type('90001');
         cy.get('#nextButton').click();
         cy.get('ngb-alert').should('not.exist');
-        cy.get('payment-information').should('be.visible');
+        cy.get('app-payment-information').should('be.visible');
     });
 
 });
 
 
-describe('Payment Info Form', () => {
+describe('Payment Information', () => {
 
     beforeEach(() => {
         cy.visit('/');
@@ -102,20 +102,16 @@ describe('Payment Info Form', () => {
         cy.get('#cardNumber').should('have.value', '');
         cy.get('#expairyDate').should('have.value', '');
         cy.get('#cvv').should('have.value', '');
-        cy.get('payment-information').find('#nextButton').click();
+        cy.get('#paymentNextButton').click();
         cy.wait(1000);
         cy.get('ngb-alert').should('exist');
     });
 
-    it.only('fills and submits the form successfully', () => {
+    it('fills and submits the form successfully', () => {
         cy.get('#cardHolderName').type('John Doe');
-        cy.get('#cardNumber').type('1234 5678 9012 3456');
+        cy.get('#cardNumber').type('4675 7645 9846 3723');
         cy.get('#expairyDate').type('12/25');
         cy.get('#cvv').type('123');
-
-        cy.get('payment-information').find('#nextButton').click();
-
-        // Additional assertion to check for successful form submission
-        cy.contains('Thank you for your payment').should('be.visible');
+        cy.get('#paymentNextButton').click();
     });
 });

@@ -55,8 +55,14 @@ export class ShippingInformaitonComponent implements OnInit {
     }
 
     private updateModelFromForm(): void {
-        const formValues = this.shippementInfoForm.value;
-        this.shippingInfoModel = { ...this.shippingInfoModel, ...formValues };
+        this.shippingInfoModel.contactName = this.shippementInfoForm.get('contactName')?.value;
+        this.shippingInfoModel.contactEmail = this.shippementInfoForm.get('contactEmail')?.value;
+        this.shippingInfoModel.contactPhoneNumber = this.shippementInfoForm.get('contactPhoneNumber')?.value;
+        this.shippingInfoModel.country = this.shippementInfoForm.get('country')?.value;
+        this.shippingInfoModel.stateProvince = this.shippementInfoForm.get('stateProvince')?.value;
+        this.shippingInfoModel.city = this.shippementInfoForm.get('city')?.value;
+        this.shippingInfoModel.streetHouse = this.shippementInfoForm.get('streetHouse')?.value;
+        this.shippingInfoModel.zipCode = this.shippementInfoForm.get('zipCode')?.value;
     }
 
     private updateFormFromModel(): void {

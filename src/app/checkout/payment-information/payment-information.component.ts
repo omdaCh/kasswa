@@ -33,7 +33,11 @@ export class PaymentInformationComponent implements OnInit {
     }
 
     private updateModelFromForm(): void {
-        this.paymentInfoModel = { ...this.paymentInfoModel, ...this.paymentInfoForm.value };
+        this.paymentInfoModel.cardHolderName = this.paymentInfoForm.get('cardHolderName')?.value; 
+        this.paymentInfoModel.cardNumber = this.paymentInfoForm.get('cardNumber')?.value; 
+        this.paymentInfoModel.expairyDate = this.paymentInfoForm.get('expairyDate')?.value; 
+        this.paymentInfoModel.cvv = this.paymentInfoForm.get('cvv')?.value; 
+        console.log('paymentInfoModel.cardNumber = ' + this.paymentInfoModel.cardNumber);
     }
 
     protected onNextClick(): void {

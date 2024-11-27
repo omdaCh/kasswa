@@ -71,7 +71,7 @@
                                 [class.is-invalid]="shippementInfoForm.get('country')?.invalid && (shippementInfoForm.get('country')?.dirty || shippementInfoForm.get('country')?.touched)">
                                 <option disabled selected>Select an option</option>
                                 @for(country of countriesList; track country){
-                                <option [value]="country">{{country.name}}</option>
+                                <option [value]="country.name">{{country.name}}</option>
                                 }
                             </select>
                             <label for="country">Country<small> *</small></label>
