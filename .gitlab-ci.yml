@@ -66,6 +66,8 @@ e2e:
     - npm ci
     # start the server in the background
     - npm start &
+    # Wait for the Angular app to be ready
+    - npx wait-on http://localhost:4200
     # run Cypress tests
     - npx cypress run --browser firefox
   artifacts:
