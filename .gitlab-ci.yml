@@ -58,23 +58,22 @@ assemble:
     policy: pull
 
 e2e:
+  image: cypress/browsers:node-22.11.0-chrome-130.0.6723.69-1-ff-132.0-edge-130.0.2849.56-1
   stage: e2e
-  image: cypress/included:12.8.1 # Cypress official Docker image
   needs: ["assemble"]
   script:
-    # Start the Angular app
-    - npm run serve & # Run Angular app in the background
-    - npx wait-on http://localhost:4200 # Wait for the app to be accessible
-    # Debugging
-    - echo "Starting Cypress tests with baseUrl=http://localhost:4200"
-    # Run Cypress tests
-    - npx cypress run --config baseUrl=http://localhost:4200
+    # install dependencies
+    - npm ci
+    # start the server in the background
+    - npm start &
+    # run Cypress tests
+    - npx cypress run --browser firefox
   artifacts:
     when: always
     paths:
-      - cypress/videos/** # Save videos of test runs
-      - cypress/screenshots/** # Save screenshots of failures
-    expire_in: 1 week
+      - cypress/videos/**/*.mp4
+      - cypress/screenshots/**/*.png
+    expire_in: 1 day
 
 .deploy:
   stage: deploy
