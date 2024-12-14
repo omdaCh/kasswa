@@ -95,6 +95,7 @@ describe('Payment Information', () => {
         cy.get('#zipCode').type('90001');
         cy.get('#nextButton').click();
     });
+    
 
     it('should initialize the form with empty and invalid state', () => {
         cy.get('form[name="paymentInfoForm"]').should('exist');
