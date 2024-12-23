@@ -13,7 +13,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, UntypedFormGroup } from 
 export class OrdersComponent implements OnInit {
 
     orderService: OrderService = inject(OrderService);
-    orders!: Order[];
+    orders: Order[] = [];
 
     fb: FormBuilder = inject(FormBuilder);
 
